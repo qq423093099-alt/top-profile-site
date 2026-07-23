@@ -1,0 +1,116 @@
+name: Update role matched introduction
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/update-role-intro.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-intro:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Rewrite homepage introduction
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          path = Path('index.html')
+          text = path.read_text(encoding='utf-8')
+
+          text = re.sub(
+              r'<meta content="TOP十年（梁俊铭）个人网站：商业IP操盘手（内容营销＋品牌战略）、人物访谈者、项目PMO。" name="description"/>',
+              '<meta content="TOP十年（梁俊铭）：创始人幕僚型项目PMO、商业IP操盘手、人物访谈者，擅长内容商业化、跨团队协同与复杂项目推进。" name="description"/>',
+              text,
+              count=1,
+          )
+          text = re.sub(
+              r'<meta content="TOP 十年｜商业IP操盘手 · 人物访谈者" property="og:title"/>',
+              '<meta content="TOP 十年｜创始人幕僚型项目PMO · 商业IP操盘手" property="og:title"/>',
+              text,
+              count=1,
+          )
+          text = re.sub(
+              r'<title>TOP 十年｜商业IP操盘手 · 人物访谈者 · 项目PMO</title>',
+              '<title>TOP 十年｜创始人幕僚型项目PMO · 商业IP操盘手</title>',
+              text,
+              count=1,
+          )
+          text = re.sub(
+              r'<p class="hero-statement">.*?</p>',
+              '<p class="hero-statement">我更擅长站在创始人身边，把复杂的事推进到底。</p>',
+              text,
+              count=1,
+              flags=re.S,
+          )
+          text = re.sub(
+              r'<p class="hero-desc">.*?</p>',
+              '<p class="hero-desc">我是TOP（梁俊铭）。做过新能源研发项目管理、创业、公司合伙人、商业IP操盘和企业家访谈。我的优势不是只会做内容，而是能快速理解创始人的真实意图，判断优先级，把想法拆成目标、责任人、节点和结果，协调内容团队、业务团队与外部资源持续推进。尤其擅长创始人IP、人物访谈、内容商业化和大湾区企业家项目。</p>',
+              text,
+              count=1,
+              flags=re.S,
+          )
+          text = re.sub(
+              r'<h2 class="smart-title"><span>商业IP操盘手</span><span>人物访谈者</span><span>项目PMO</span></h2>',
+              '<h2 class="smart-title"><span>创始人幕僚型项目PMO</span><span>商业IP操盘手</span><span>人物访谈者</span></h2>',
+              text,
+              count=1,
+          )
+          text = re.sub(
+              r'<div class="tag-row">\s*<span>内容 × 商业</span>\s*<span>大湾区</span>\s*<span>New Money</span>\s*</div>',
+              '<div class="tag-row"><span>创始人幕僚</span><span>内容 × 商业</span><span>大湾区</span><span>New Money</span></div>',
+              text,
+              count=1,
+              flags=re.S,
+          )
+          text = re.sub(
+              r'<h2 class="smart-title"><span>我擅长的，</span><span>从来不只是流量。</span></h2>',
+              '<h2 class="smart-title"><span>内容、商业、项目，</span><span>我会放在一起看。</span></h2>',
+              text,
+              count=1,
+          )
+          text = text.replace(
+              '<p class="lead reveal">我是TOP（梁俊铭），商业IP操盘手，核心方向是内容营销与品牌战略。我做的不是单点内容执行，而是从定位、选题、脚本、产品到私域与商业化的完整链路。</p>',
+              '<p class="lead reveal">我更适合承担创始人身边的幕僚型项目PMO：不是替老板处理琐事，也不是只盯进度表，而是先理解这件事为什么做、现在该不该做、谁来做，再把它推进到结果。</p>',
+          )
+          text = text.replace(
+              '<p class="reveal">我擅长账号定位、选题策划、流量型与变现型文案脚本、知识付费产品搭建和品牌营销策略，能够把创始人的专业能力、人生经历和业务优势，转化为可传播、可承接、可成交的内容资产。</p>',
+              '<p class="reveal">我做过研发项目管理、公司合伙人、商业IP操盘和企业家访谈，能够在创始人、内容团队、业务团队、供应商和外部嘉宾之间切换语言。面对多项目并行，我会先排优先级，再拆目标、责任人、时间节点、风险和复盘机制。</p>',
+          )
+          text = text.replace(
+              '<p class="reveal">作为商业IP操盘手与公司合伙人，我参与完成公司0到1的业务产品体系、团队组织、业务流程、私域体系与IP项目交付搭建，公司年营收约200万元；累计线上学员500+、线下IP孵化20+，操盘打造精准破亿流量。</p>',
+              '<p class="reveal">我的核心长板是商业IP与内容商业化：定位、选题、脚本、访谈、产品、私域和交付都做过。大湾区企业家访谈与资源协同经验，也让我更适合统筹创始人IP、企业家活动、访谈内容和长期品牌项目。能接住，也能在方向不对时提出异议、劝停和做减法。</p>',
+          )
+          text = text.replace(
+              '<blockquote class="reveal">“通过内容营销实现增长，并把流量真正接到产品、私域、品牌与全域商业化。”</blockquote>',
+              '<blockquote class="reveal">“把创始人脑子里的事，变成团队知道为什么做、谁来做、什么时候交，最后能不能算清结果的项目。”</blockquote>',
+          )
+
+          path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Commit homepage update
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "No changes needed"
+          else
+            git commit -m "Tailor introduction for IP chief of staff role"
+            git push origin HEAD:main
+          fi
