@@ -1,0 +1,44 @@
+name: Update role labels
+
+on:
+  push:
+    paths:
+      - '.github/workflows/update-role-labels.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Replace role labels
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('index.html')
+          text = path.read_text(encoding='utf-8')
+          replacements = {
+              '<meta content="TOP十年（梁俊铭）：创始人幕僚型项目PMO、商业IP操盘手、人物访谈者，擅长内容商业化、跨团队协同与复杂项目推进。" name="description"/>': '<meta content="TOP十年（梁俊铭）：商业IP操盘手、IP访谈创作者、项目PMO，擅长内容商业化、跨团队协同与复杂项目推进。" name="description"/>',
+              '<meta content="TOP 十年｜创始人幕僚型项目PMO · 商业IP操盘手" property="og:title"/>': '<meta content="TOP 十年｜商业IP操盘手 · IP访谈创作者 · 项目PMO" property="og:title"/>',
+              '<title>TOP 十年｜创始人幕僚型项目PMO · 商业IP操盘手</title>': '<title>TOP 十年｜商业IP操盘手 · IP访谈创作者 · 项目PMO</title>',
+              '<h2 class="smart-title"><span>创始人幕僚型项目PMO</span><span>商业IP操盘手</span><span>人物访谈者</span></h2>': '<h2 class="smart-title"><span>商业IP操盘手</span><span>IP访谈创作者</span><span>项目PMO</span></h2>'
+          }
+          for old, new in replacements.items():
+              text = text.replace(old, new)
+          path.write_text(text, encoding='utf-8')
+          PY
+      - name: Commit update
+        run: |
+          if git diff --quiet; then
+            echo "No changes needed"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Update homepage role labels"
+          git push
