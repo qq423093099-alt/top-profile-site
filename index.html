@@ -1,4 +1,5 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="zh-CN"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
@@ -7,288 +8,297 @@
 <meta content="TOP 十年｜商业IP操盘手 · 人物访谈者" property="og:title"/>
 <meta content="把创始人的经验、判断和业务，做成能传播、能成交、能长期积累的内容与项目。" property="og:description"/>
 <title>TOP 十年｜商业IP操盘手 · 人物访谈者 · 项目PMO</title>
-<style>:root {
-  --bg: #08090d;
-  --bg-soft: #0d0f16;
-  --panel: rgba(255, 255, 255, 0.055);
-  --panel-strong: rgba(255, 255, 255, 0.085);
-  --line: rgba(255, 255, 255, 0.11);
-  --text: #f5f2eb;
-  --muted: #aaa8b1;
-  --violet: #a58bff;
-  --blue: #6fa7ff;
-  --orange: #ff9b6a;
-  --green: #8de6b7;
-  --max: 1180px;
-  --radius: 26px;
+<style>@charset "UTF-8";
+:root {
+  --bg: #09090b;
+  --bg-soft: #111116;
+  --panel: rgba(255,255,255,.045);
+  --panel-strong: rgba(255,255,255,.075);
+  --line: rgba(255,255,255,.12);
+  --line-soft: rgba(255,255,255,.075);
+  --text: #f4f1ea;
+  --muted: #a8a6ae;
+  --muted-2: #73727a;
+  --violet: #9c7cff;
+  --blue: #72a7ff;
+  --orange: #ff9d6c;
+  --green: #9ce9c5;
+  --max: 1240px;
+  --radius: 28px;
+  --shadow: 0 30px 90px rgba(0,0,0,.45);
 }
-
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: Inter, "SF Pro Display", "SF Pro Text", "PingFang SC", "Microsoft YaHei", system-ui, -apple-system, sans-serif;
+  font-family: Inter, "SF Pro Display", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: -3;
-  background:
-    radial-gradient(circle at 15% 12%, rgba(128, 88, 255, .16), transparent 28%),
-    radial-gradient(circle at 86% 66%, rgba(66, 132, 255, .10), transparent 30%),
-    var(--bg);
-}
 a { color: inherit; text-decoration: none; }
-button, a { -webkit-tap-highlight-color: transparent; }
-
-.noise {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  opacity: .04;
-  z-index: 10;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+button { font: inherit; }
+.noise { position: fixed; inset: 0; pointer-events:none; opacity:.028; z-index:90; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E"); }
+.spotlight { position: fixed; width: 520px; height: 520px; border-radius:50%; pointer-events:none; z-index:-1; background:radial-gradient(circle, rgba(124,91,255,.08), transparent 70%); transform:translate(-50%,-50%); }
+.section-pad { padding-left:max(24px, calc((100vw - var(--max))/2)); padding-right:max(24px, calc((100vw - var(--max))/2)); }
+.site-header { position: fixed; z-index:80; top:18px; left:50%; transform:translateX(-50%); width:min(calc(100% - 32px), 1140px); height:66px; display:flex; align-items:center; justify-content:space-between; border:1px solid var(--line); border-radius:20px; padding:0 17px; background:rgba(9,9,12,.72); backdrop-filter:blur(20px); box-shadow:0 20px 70px rgba(0,0,0,.36); }
+.brand { display:flex; align-items:center; gap:11px; font-weight:800; letter-spacing:-.02em; }
+.brand-mark { width:36px; height:36px; border-radius:12px; display:grid; place-items:center; color:#0a0a0c; background:linear-gradient(135deg,var(--violet),var(--blue),var(--orange)); font-weight:900; }
+.nav { display:flex; align-items:center; gap:3px; }
+.nav a { color:#aaa8b0; font-size:12px; padding:10px 12px; border-radius:11px; transition:.25s; }
+.nav a:hover { color:#fff; background:rgba(255,255,255,.055); }
+.nav .nav-cta { color:#09090b; background:#f2efe8; font-weight:750; margin-left:7px; }
+.menu-toggle { display:none; position:relative; width:44px; height:44px; border:0; background:none; cursor:pointer; }
+.menu-toggle span { position:absolute; left:11px; right:11px; height:1px; background:#d8d5cf; transition:.25s; }
+.menu-toggle span:first-child { top:17px; }
+.menu-toggle span:last-child { top:26px; }
+.hero { min-height:100vh; padding-top:145px; padding-bottom:90px; display:grid; grid-template-columns:1.36fr .64fr; gap:78px; align-items:center; position:relative; }
+.hero::before { content:""; position:absolute; inset:0; z-index:-2; background:radial-gradient(circle at 15% 22%, rgba(104,67,255,.19), transparent 27%), radial-gradient(circle at 80% 67%, rgba(39,104,214,.11), transparent 30%); }
+.hero::after { content:""; position:absolute; inset:0; z-index:-3; background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px); background-size:80px 80px; mask-image:linear-gradient(to bottom,rgba(0,0,0,.9),transparent 85%); }
+.hero-orbit { position:absolute; border:1px solid rgba(255,255,255,.06); border-radius:50%; pointer-events:none; }
+.orbit-one { width:700px; height:700px; right:-340px; top:80px; }
+.orbit-two { width:430px; height:430px; right:-180px; top:215px; border-color:rgba(156,124,255,.15); }
+.eyebrow { display:flex; align-items:center; gap:10px; color:#98969e; font-size:11px; letter-spacing:.18em; font-weight:700; }
+.eyebrow span { width:28px; height:1px; background:linear-gradient(90deg,var(--violet),var(--blue)); }
+.hero h1 { margin:25px 0 8px; font-size:clamp(58px,7.8vw,116px); line-height:.94; letter-spacing:-.07em; font-weight:760; }
+.gradient-text { background:linear-gradient(90deg,#f5f1e9 10%,var(--violet) 45%,var(--blue) 78%,var(--orange)); color:transparent; -webkit-background-clip:text; background-clip:text; }
+.hero-statement { margin:22px 0 24px; font-size:clamp(24px,2.4vw,38px); line-height:1.25; letter-spacing:-.03em; color:#d6d2cc; }
+.hero-desc { max-width:720px; color:var(--muted); line-height:1.95; font-size:16px; }
+.hero-actions { display:flex; align-items:center; gap:12px; margin-top:36px; flex-wrap:wrap; }
+.button { min-height:48px; padding:0 20px; border-radius:14px; display:inline-flex; align-items:center; justify-content:center; gap:10px; border:1px solid transparent; cursor:pointer; transition:transform .25s,background .25s,border-color .25s; font-size:14px; }
+.button:hover { transform:translateY(-2px); }
+.button.primary { background:#f3f0e8; color:#09090b; font-weight:750; box-shadow:0 20px 55px rgba(255,255,255,.08); }
+.button.primary:hover { background:#fff; }
+.button.ghost { border-color:var(--line); background:rgba(255,255,255,.035); color:#d7d4d0; }
+.button.ghost:hover { background:rgba(255,255,255,.075); border-color:rgba(255,255,255,.22); }
+.hero-card { position:relative; min-height:520px; border-radius:36px; border:1px solid rgba(255,255,255,.12); overflow:hidden; background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.018)); box-shadow:var(--shadow); backdrop-filter:blur(18px); display:flex; flex-direction:column; justify-content:space-between; padding:24px; }
+.hero-card::before { content:""; position:absolute; width:300px; height:300px; border-radius:50%; top:-80px; right:-80px; background:radial-gradient(circle,rgba(151,111,255,.46),transparent 68%); filter:blur(10px); }
+.hero-card::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 30%,rgba(6,6,8,.56)); pointer-events:none; }
+.portrait-monogram { position:relative; z-index:1; height:300px; display:flex; flex-direction:column; justify-content:center; align-items:center; }
+.portrait-monogram span { font-size:clamp(72px,8vw,118px); font-weight:850; letter-spacing:-.08em; color:rgba(255,255,255,.92); text-shadow:0 20px 70px rgba(146,112,255,.4); }
+.portrait-monogram small { color:#b5b1bc; letter-spacing:.45em; margin-left:.45em; font-size:12px; }
+.hero-card-copy { position:relative; z-index:2; }
+.status { color:#b9b6c0; font-size:11px; letter-spacing:.04em; display:flex; align-items:center; gap:8px; margin-bottom:16px; }
+.status i { width:7px; height:7px; border-radius:50%; background:var(--green); box-shadow:0 0 18px var(--green); }
+.hero-card h2 { margin:0; font-size:28px; line-height:1.35; letter-spacing:-.03em; }
+.tag-row { display:flex; gap:7px; flex-wrap:wrap; margin-top:20px; }
+.tag-row span { font-size:11px; color:#bcb8c2; padding:7px 9px; border:1px solid rgba(255,255,255,.1); border-radius:999px; background:rgba(0,0,0,.18); }
+.scroll-hint { position:absolute; bottom:24px; left:max(24px,calc((100vw - var(--max))/2)); font-size:9px; letter-spacing:.22em; color:#66656d; display:flex; align-items:center; gap:10px; }
+.scroll-hint span { width:45px; height:1px; background:#4a4950; }
+.metrics { display:grid; grid-template-columns:repeat(4,1fr); width:min(calc(100% - 48px),var(--max)); margin:0 auto; border:1px solid var(--line-soft); border-radius:24px; overflow:hidden; background:rgba(255,255,255,.025); }
+.metric { padding:34px 30px; position:relative; }
+.metric:not(:last-child)::after { content:""; position:absolute; right:0; top:26%; bottom:26%; width:1px; background:var(--line-soft); }
+.metric strong { display:block; font-size:clamp(33px,4vw,56px); line-height:1; letter-spacing:-.06em; font-variant-numeric:tabular-nums; }
+.metric span { display:block; color:var(--muted-2); font-size:12px; margin-top:12px; letter-spacing:.05em; }
+.section { padding-top:145px; padding-bottom:145px; }
+.section-kicker { color:#77757f; font-size:10px; letter-spacing:.22em; font-weight:800; margin-bottom:42px; }
+.section-heading { display:flex; justify-content:space-between; gap:40px; align-items:flex-end; margin-bottom:56px; }
+.section-heading h2,.sticky-title h2,.contact h2,.principles-wrap h2 { margin:0; font-size:clamp(38px,5vw,70px); line-height:1.08; letter-spacing:-.055em; }
+.section-heading p { max-width:480px; margin:0 0 7px; color:var(--muted); line-height:1.75; font-size:14px; }
+.about-grid { display:grid; grid-template-columns:.75fr 1.25fr; gap:100px; }
+.sticky-title { align-self:start; position:sticky; top:130px; }
+.about-content { max-width:760px; }
+.about-content p { margin:0 0 28px; font-size:17px; line-height:2; color:#b7b4bc; }
+.about-content .lead { font-size:clamp(24px,2.7vw,39px); color:#eeeae4; line-height:1.55; letter-spacing:-.025em; }
+blockquote { margin:54px 0 0; padding:30px 34px; border-left:2px solid var(--violet); border-radius:0 20px 20px 0; background:linear-gradient(90deg,rgba(151,112,255,.12),rgba(255,255,255,.02)); font-size:23px; line-height:1.65; color:#e7e1eb; }
+.capabilities-section { background:linear-gradient(180deg,transparent,rgba(255,255,255,.018),transparent); }
+.capability-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+.capability-card { min-height:430px; padding:28px; border:1px solid var(--line-soft); border-radius:24px; background:linear-gradient(155deg,rgba(255,255,255,.055),rgba(255,255,255,.018)); transition:.35s; }
+.capability-card:hover { transform:translateY(-8px); border-color:rgba(156,124,255,.28); background:linear-gradient(155deg,rgba(156,124,255,.095),rgba(255,255,255,.025)); box-shadow:0 24px 60px rgba(0,0,0,.25); }
+.cap-index { color:#66646e; font-size:11px; letter-spacing:.16em; }
+.capability-card h3 { font-size:29px; margin:70px 0 18px; letter-spacing:-.04em; }
+.capability-card p { color:var(--muted); line-height:1.85; font-size:14px; min-height:126px; }
+.capability-card ul { list-style:none; padding:20px 0 0; margin:0; border-top:1px solid var(--line-soft); }
+.capability-card li { color:#aaa7af; font-size:12px; padding:7px 0; }
+.capability-card li::before { content:"—"; color:var(--violet); margin-right:8px; }
+.case-list { display:flex; flex-direction:column; gap:16px; }
+.case-card { display:grid; grid-template-columns:90px 1fr; border:1px solid var(--line-soft); border-radius:26px; background:rgba(255,255,255,.022); overflow:hidden; transition:.35s; }
+.case-card:hover { border-color:rgba(255,255,255,.18); background:rgba(255,255,255,.038); transform:translateY(-3px); }
+.case-number { padding:30px 0 0 30px; color:#5f5d66; font-size:11px; letter-spacing:.18em; border-right:1px solid var(--line-soft); }
+.case-main { padding:34px 38px 38px; }
+.case-meta { display:flex; justify-content:space-between; gap:20px; color:#7d7b85; font-size:11px; letter-spacing:.08em; text-transform:uppercase; }
+.case-main h3 { margin:32px 0 15px; font-size:clamp(27px,3.1vw,47px); letter-spacing:-.045em; line-height:1.22; }
+.case-main>p { color:#aaa8b0; line-height:1.9; max-width:850px; font-size:14px; }
+.case-results { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:32px; }
+.case-results.compact { grid-template-columns:repeat(3,1fr); max-width:760px; }
+.case-results div { border-top:1px solid var(--line-soft); padding-top:18px; }
+.case-results strong { display:block; font-size:23px; letter-spacing:-.03em; }
+.case-results span { display:block; color:#706f77; font-size:11px; margin-top:7px; }
+.case-card.featured { position:relative; background:linear-gradient(135deg,rgba(128,90,255,.12),rgba(40,80,160,.04),rgba(255,255,255,.02)); }
+.case-card.featured::after { content:""; position:absolute; right:-90px; top:-130px; width:360px; height:360px; border-radius:50%; background:radial-gradient(circle,rgba(130,96,255,.18),transparent 70%); pointer-events:none; }
+.case-card.new-money { background:linear-gradient(135deg,rgba(255,153,102,.085),rgba(151,112,255,.075),rgba(255,255,255,.02)); }
+.case-quote { font-size:19px!important; color:#ddd7df!important; max-width:850px!important; border-left:1px solid var(--orange); padding-left:20px; margin-top:28px; }
+.experience-section { background:rgba(255,255,255,.012); }
+.timeline { max-width:1000px; margin-left:auto; }
+.timeline-item { display:grid; grid-template-columns:145px 34px 1fr; min-height:210px; }
+.timeline-time { padding-top:7px; color:#727079; font-size:10px; letter-spacing:.14em; }
+.timeline-dot { position:relative; }
+.timeline-dot::before { content:""; position:absolute; top:7px; left:13px; width:8px; height:8px; border-radius:50%; background:var(--violet); box-shadow:0 0 25px rgba(156,124,255,.8); }
+.timeline-dot::after { content:""; position:absolute; top:24px; bottom:0; left:16.5px; width:1px; background:linear-gradient(var(--line),transparent); }
+.timeline-item:last-child .timeline-dot::after { display:none; }
+.timeline-content { padding:0 0 60px 30px; border-bottom:1px solid var(--line-soft); }
+.timeline-item:last-child .timeline-content { border-bottom:0; }
+.timeline-content h3 { margin:0 0 8px; font-size:26px; letter-spacing:-.03em; }
+.timeline-content h4 { margin:0 0 20px; color:#9b98a2; font-size:13px; font-weight:500; }
+.timeline-content p { margin:0; color:#8e8c95; line-height:1.85; font-size:14px; }
+.direction-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+.direction { min-height:270px; padding:30px; border-radius:24px; border:1px solid var(--line-soft); background:rgba(255,255,255,.024); transition:.3s; }
+.direction:hover { transform:translateY(-4px); border-color:rgba(255,255,255,.18); }
+.direction>span { color:#66646d; font-size:11px; }
+.direction h3 { font-size:27px; margin:55px 0 15px; letter-spacing:-.04em; }
+.direction p { margin:0; color:#95939c; line-height:1.8; font-size:14px; }
+.principles-section { padding-top:60px; }
+.principles-wrap { display:grid; grid-template-columns:.75fr 1.25fr; gap:70px; padding:55px; border-radius:32px; border:1px solid var(--line); background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018)); }
+.principles-wrap ol { list-style:none; margin:0; padding:0; }
+.principles-wrap li { display:grid; grid-template-columns:42px 1fr; gap:16px; padding:20px 0; border-bottom:1px solid var(--line-soft); }
+.principles-wrap li:last-child { border-bottom:0; }
+.principles-wrap li>span { color:#67656e; font-size:11px; padding-top:3px; }
+.principles-wrap strong { font-size:17px; }
+.principles-wrap p { margin:8px 0 0; color:#8f8d96; line-height:1.75; font-size:13px; }
+.contact { min-height:720px; position:relative; display:flex; align-items:center; overflow:hidden; border-top:1px solid var(--line-soft); }
+.contact::before { content:""; position:absolute; inset:0; background:radial-gradient(circle at 70% 55%,rgba(124,94,255,.17),transparent 32%),linear-gradient(160deg,#0b0b10,#09090b); }
+.contact-glow { position:absolute; width:620px; height:620px; border:1px solid rgba(156,124,255,.18); border-radius:50%; right:-170px; top:50px; box-shadow:inset 0 0 100px rgba(124,94,255,.05); }
+.contact-glow::before,.contact-glow::after { content:""; position:absolute; border:1px solid rgba(255,255,255,.06); border-radius:50%; inset:70px; }
+.contact-glow::after { inset:145px; border-color:rgba(114,167,255,.1); }
+.contact-inner { position:relative; z-index:2; max-width:1050px; }
+.contact h2 { margin:32px 0 26px; max-width:1000px; }
+.contact p { color:#9e9ca5; font-size:15px; }
+.contact-actions { display:flex; gap:12px; margin-top:36px; align-items:center; flex-wrap:wrap; }
+.contact-note { margin-top:80px; color:#65636c; font-size:11px; letter-spacing:.12em; }
+footer { min-height:84px; display:flex; justify-content:space-between; align-items:center; gap:20px; padding:0 max(24px,calc((100vw - var(--max))/2)); border-top:1px solid var(--line-soft); color:#605f66; font-size:10px; letter-spacing:.12em; }
+footer a:hover { color:#aaa8b0; }
+.toast { position:fixed; z-index:100; left:50%; bottom:30px; transform:translate(-50%,30px); opacity:0; pointer-events:none; background:#f1eee7; color:#0a0a0c; font-size:13px; font-weight:700; padding:12px 18px; border-radius:12px; transition:.3s; box-shadow:0 18px 50px rgba(0,0,0,.4); }
+.toast.show { opacity:1; transform:translate(-50%,0); }
+.reveal { opacity:0; transform:translateY(22px); transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1); }
+.reveal.visible { opacity:1; transform:none; }
+.delay-1 { transition-delay:.08s; }
+.delay-2 { transition-delay:.16s; }
+.delay-3 { transition-delay:.24s; }
+@media (max-width:980px) {
+  .hero { grid-template-columns:1fr; gap:48px; padding-top:140px; }
+  .hero-card { min-height:420px; max-width:580px; }
+  .portrait-monogram { height:210px; }
+  .metrics { grid-template-columns:repeat(2,1fr); }
+  .metric:nth-child(2)::after { display:none; }
+  .metric:nth-child(-n+2) { border-bottom:1px solid var(--line-soft); }
+  .about-grid { grid-template-columns:1fr; gap:55px; }
+  .sticky-title { position:static; }
+  .capability-grid { grid-template-columns:repeat(2,1fr); }
+  .capability-card { min-height:380px; }
+  .principles-wrap { grid-template-columns:1fr; gap:45px; }
 }
-.spotlight {
-  position: fixed;
-  width: 560px;
-  height: 560px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(131, 93, 255, .12), transparent 67%);
-  pointer-events: none;
-  z-index: -1;
-  transform: translate(-50%, -50%);
-  left: 50%; top: 30%;
+@media (max-width:720px) {
+  .site-header { top:10px; height:58px; width:calc(100% - 20px); border-radius:16px; }
+  .menu-toggle { display:block; }
+  .nav { position:fixed; left:10px; right:10px; top:78px; padding:12px; flex-direction:column; align-items:stretch; background:rgba(12,12,15,.95); border:1px solid var(--line); border-radius:18px; backdrop-filter:blur(20px); opacity:0; transform:translateY(-12px); pointer-events:none; transition:.25s; }
+  .nav.open { opacity:1; transform:none; pointer-events:auto; }
+  .nav a { padding:13px; }
+  .nav .nav-cta { margin:4px 0 0; text-align:center; }
+  .menu-toggle.active span:first-child { transform:rotate(45deg); top:20px; }
+  .menu-toggle.active span:last-child { transform:rotate(-45deg); top:20px; }
+  .section-pad { padding-left:20px; padding-right:20px; }
+  .hero { min-height:auto; padding-top:120px; padding-bottom:90px; }
+  .hero h1 { font-size:56px; }
+  .hero-statement { font-size:23px; }
+  .hero-desc { font-size:14px; line-height:1.85; }
+  .hero-card { min-height:380px; border-radius:28px; }
+  .hero-card h2 { font-size:24px; }
+  .scroll-hint { display:none; }
+  .metrics { width:calc(100% - 40px); }
+  .metric { padding:25px 20px; }
+  .metric strong { font-size:36px; }
+  .section { padding-top:100px; padding-bottom:100px; }
+  .section-kicker { margin-bottom:28px; }
+  .section-heading { display:block; margin-bottom:38px; }
+  .section-heading h2,.sticky-title h2,.contact h2,.principles-wrap h2 { font-size:40px; }
+  .section-heading p { margin-top:18px; }
+  .about-content p { font-size:15px; }
+  .about-content .lead { font-size:24px; }
+  blockquote { font-size:18px; margin-top:35px; padding:24px; }
+  .capability-grid { grid-template-columns:1fr; }
+  .capability-card { min-height:auto; padding:25px; }
+  .capability-card h3 { margin-top:45px; }
+  .capability-card p { min-height:auto; }
+  .case-card { grid-template-columns:1fr; }
+  .case-number { border-right:0; border-bottom:1px solid var(--line-soft); padding:18px 24px; }
+  .case-main { padding:25px 24px 30px; }
+  .case-meta { flex-direction:column; gap:7px; }
+  .case-main h3 { margin-top:24px; font-size:29px; }
+  .case-results,.case-results.compact { grid-template-columns:repeat(2,1fr); }
+  .timeline { margin-left:0; }
+  .timeline-item { grid-template-columns:85px 25px 1fr; }
+  .timeline-content { padding-left:18px; }
+  .timeline-content h3 { font-size:20px; }
+  .direction-grid { grid-template-columns:1fr; }
+  .direction { min-height:225px; }
+  .principles-wrap { padding:28px 24px; border-radius:24px; }
+  .contact { min-height:660px; }
+  .contact-actions { align-items:stretch; }
+  .contact-actions .button { width:100%; }
+  .contact-note { margin-top:55px; }
+  footer { flex-direction:column; justify-content:center; padding-top:25px; padding-bottom:25px; text-align:center; }
 }
 
-.section-pad { padding-left: max(26px, calc((100vw - var(--max)) / 2)); padding-right: max(26px, calc((100vw - var(--max)) / 2)); }
-.section { padding-top: 130px; padding-bottom: 130px; }
-.section-kicker { font-size: 11px; letter-spacing: .18em; color: #777680; font-weight: 750; margin-bottom: 28px; }
-.section-heading { display: grid; grid-template-columns: 1.2fr .8fr; gap: 60px; align-items: end; margin-bottom: 58px; }
-.section-heading h2, .sticky-title h2, .principles-wrap h2 { margin: 0; letter-spacing: -.055em; line-height: 1.05; font-size: clamp(40px, 5vw, 68px); }
-.section-heading p { margin: 0; color: var(--muted); line-height: 1.85; max-width: 470px; justify-self: end; }
+/* Intentional headline lines for a cleaner editorial rhythm. */
+.hero-copy h1 > span:first-child,
+.sticky-title h2 > span:first-child,
+.capabilities-section .section-heading h2 > span:first-child,
+.cases-section .section-heading h2 > span:first-child,
+.direction-section .section-heading h2 > span:first-child,
+.principles-wrap h2 > span:first-child {
+  flex-basis: 100%;
+}
+.hero-card h2.smart-title {
+  flex-direction: column;
+  align-items: flex-start;
+}
 
-.site-header {
-  position: fixed;
-  top: 18px; left: 50%;
-  transform: translateX(-50%);
-  width: min(calc(100% - 32px), 1120px);
-  height: 64px;
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  padding: 0 16px;
+/* Controlled title wrapping: phrases wrap as complete visual units, never as orphaned characters. */
+.smart-title {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 30;
-  background: rgba(8, 9, 13, .72);
-  backdrop-filter: blur(18px);
-  box-shadow: 0 20px 70px rgba(0,0,0,.42);
+  flex-wrap: wrap;
+  align-items: baseline;
+  align-content: flex-start;
+  column-gap: 0;
+  row-gap: 0;
+  text-wrap: balance;
 }
-.brand { display: flex; align-items: center; gap: 11px; font-weight: 780; }
-.brand-mark { width: 35px; height: 35px; display: grid; place-items: center; border-radius: 11px; background: linear-gradient(135deg, var(--violet), var(--blue), var(--orange)); color: #08090d; font-weight: 900; }
-.nav { display: flex; align-items: center; gap: 3px; }
-.nav a { padding: 10px 12px; color: #b5b2bb; font-size: 13px; border-radius: 10px; }
-.nav a:hover { color: #fff; background: rgba(255,255,255,.05); }
-.nav .nav-cta { background: #f2efe8; color: #090a0e; font-weight: 750; margin-left: 8px; }
-.menu-toggle { display: none; background: none; border: 0; width: 40px; height: 40px; padding: 0; }
-.menu-toggle span { display: block; width: 20px; height: 1px; background: #fff; margin: 6px auto; }
-
-.hero { min-height: 100vh; padding-top: 148px; padding-bottom: 86px; position: relative; display: grid; grid-template-columns: 1.25fr .75fr; column-gap: 64px; align-items: center; background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px); background-size: 78px 78px; mask-image: linear-gradient(#000 0 88%, transparent); }
-.hero-copy { position: relative; z-index: 2; }
-.eyebrow { color: #96949e; font-size: 11px; letter-spacing: .16em; font-weight: 750; }
-.eyebrow span { display: inline-block; width: 28px; height: 1px; margin-right: 10px; vertical-align: middle; background: linear-gradient(90deg, var(--violet), var(--blue)); }
-.hero h1 { margin: 24px 0 20px; font-size: clamp(62px, 7.9vw, 112px); letter-spacing: -.078em; line-height: .93; }
-.gradient-text { background: linear-gradient(90deg, #fff 4%, var(--violet) 42%, var(--blue) 70%, var(--orange)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.hero-statement { margin: 0 0 22px; font-size: clamp(25px, 3.1vw, 42px); color: #d8d4ce; letter-spacing: -.04em; line-height: 1.3; }
-.hero-desc { max-width: 750px; line-height: 1.9; color: var(--muted); font-size: 16px; }
-.hero-actions, .contact-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
-.button { min-height: 48px; padding: 0 20px; border-radius: 14px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--line); background: transparent; color: inherit; font: inherit; font-size: 14px; cursor: pointer; transition: .25s ease; }
-.button:hover { transform: translateY(-2px); }
-.button.primary { background: #f3f0e9; color: #090a0d; border-color: transparent; font-weight: 760; }
-.button.ghost { background: rgba(255,255,255,.04); color: #d3d0ca; }
-.button.text-button { border-color: transparent; color: #8d8a94; }
-
-.hero-card { min-height: 510px; border-radius: 34px; border: 1px solid var(--line); background: linear-gradient(145deg, rgba(255,255,255,.085), rgba(255,255,255,.02)); position: relative; overflow: hidden; padding: 26px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 35px 100px rgba(0,0,0,.55); }
-.hero-card::before { content: ""; position: absolute; width: 310px; height: 310px; border-radius: 50%; right: -80px; top: -80px; background: radial-gradient(circle, rgba(153, 112, 255, .62), transparent 68%); filter: blur(8px); }
-.portrait-monogram { height: 300px; display: grid; place-items: center; position: relative; }
-.portrait-monogram span { font-size: 102px; font-weight: 760; letter-spacing: -.09em; text-shadow: 0 22px 75px rgba(128, 89, 255, .4); }
-.portrait-monogram small { position: absolute; bottom: 58px; font-size: 12px; letter-spacing: .5em; margin-left: .5em; color: rgba(255,255,255,.5); }
-.status { color: #b6b3bd; font-size: 12px; margin-bottom: 14px; }
-.status i { width: 7px; height: 7px; background: var(--green); box-shadow: 0 0 15px var(--green); border-radius: 50%; display: inline-block; margin-right: 8px; }
-.hero-card h2 { margin: 0; font-size: 30px; line-height: 1.28; letter-spacing: -.035em; }
-.tag-row { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 19px; }
-.tag-row span { font-size: 11px; color: #b7b4bd; border: 1px solid rgba(255,255,255,.09); border-radius: 99px; padding: 7px 9px; background: rgba(0,0,0,.16); }
-.hero-orbit { position: absolute; border: 1px solid rgba(255,255,255,.055); border-radius: 50%; pointer-events: none; }
-.orbit-one { width: 580px; height: 580px; right: -210px; top: 100px; }
-.orbit-two { width: 760px; height: 760px; right: -290px; top: 10px; }
-.scroll-hint { position: absolute; left: max(26px, calc((100vw - var(--max)) / 2)); bottom: 28px; font-size: 9px; letter-spacing: .25em; color: #5e5c65; writing-mode: vertical-rl; }
-.scroll-hint span { display: block; height: 42px; width: 1px; background: linear-gradient(#777, transparent); margin: 0 auto 10px; }
-
-.metrics { width: min(calc(100% - 52px), var(--max)); margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); border: 1px solid var(--line); border-radius: 24px; overflow: hidden; background: rgba(255,255,255,.035); }
-.metric { padding: 34px 28px; min-height: 145px; display: flex; flex-direction: column; justify-content: center; }
-.metric + .metric { border-left: 1px solid rgba(255,255,255,.08); }
-.metric strong { font-size: 48px; letter-spacing: -.06em; line-height: 1; }
-.metric span { color: #7d7b85; font-size: 12px; margin-top: 14px; }
-
-.about-grid { display: grid; grid-template-columns: .75fr 1.25fr; gap: 110px; }
-.sticky-title { align-self: start; position: sticky; top: 140px; }
-.about-content p { margin: 0 0 26px; font-size: 17px; line-height: 2; color: #b6b3bc; }
-.about-content p.lead { font-size: clamp(23px, 2.4vw, 32px); color: #e3dfd8; line-height: 1.65; letter-spacing: -.02em; }
-.about-content blockquote { margin: 52px 0 0; border-left: 2px solid var(--violet); padding: 4px 0 4px 23px; color: #e5e0ea; font-size: 24px; line-height: 1.6; }
-
-.capabilities-section { background: linear-gradient(180deg, transparent, rgba(255,255,255,.018), transparent); }
-.capability-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-.capability-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 27px; background: var(--panel); min-height: 390px; display: flex; flex-direction: column; transition: .25s ease; }
-.capability-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,.22); background: var(--panel-strong); }
-.cap-index { color: #66646e; font-size: 12px; }
-.capability-card h3 { font-size: 27px; margin: 48px 0 18px; letter-spacing: -.035em; }
-.capability-card p { margin: 0; color: var(--muted); line-height: 1.8; font-size: 14px; }
-.capability-card ul { list-style: none; margin: auto 0 0; padding: 26px 0 0; border-top: 1px solid rgba(255,255,255,.07); }
-.capability-card li { color: #85838c; font-size: 12px; padding: 5px 0; }
-.capability-card li::before { content: "↳"; margin-right: 7px; color: #9a7fff; }
-
-.cases-section { background: #0b0d13; }
-.case-list { display: grid; gap: 19px; }
-.case-card { border: 1px solid var(--line); border-radius: 28px; background: linear-gradient(135deg, rgba(255,255,255,.055), rgba(255,255,255,.018)); padding: 35px; display: grid; grid-template-columns: 80px 1fr; gap: 14px; position: relative; overflow: hidden; transition: .25s ease; }
-.case-card:hover { transform: translateY(-3px); border-color: rgba(255,255,255,.22); }
-.case-card.featured::after, .case-card.new-money::after { content: ""; position: absolute; width: 260px; height: 260px; border-radius: 50%; right: -100px; top: -100px; filter: blur(12px); background: radial-gradient(circle, rgba(146, 101, 255, .27), transparent 70%); }
-.case-number { color: #67656f; font-size: 13px; }
-.case-main { position: relative; z-index: 2; }
-.case-meta { display: flex; justify-content: space-between; gap: 20px; color: #77757f; font-size: 12px; margin-bottom: 19px; }
-.case-card h3 { margin: 0 0 16px; font-size: clamp(26px, 3vw, 37px); letter-spacing: -.04em; line-height: 1.25; }
-.case-card p { color: var(--muted); line-height: 1.9; max-width: 900px; }
-.case-results { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 27px; }
-.case-results.compact { grid-template-columns: repeat(3,1fr); max-width: 760px; }
-.case-results > div { padding: 18px; border: 1px solid rgba(255,255,255,.07); border-radius: 17px; background: rgba(0,0,0,.14); }
-.case-results strong { display: block; font-size: 25px; letter-spacing: -.04em; }
-.case-results span { display: block; color: #77757f; font-size: 11px; margin-top: 8px; }
-.case-card.new-money { border-color: rgba(162, 130, 255, .28); background: linear-gradient(135deg, rgba(128, 88, 255, .1), rgba(255,255,255,.025)); }
-.case-quote { font-size: 19px; color: #d8d3df !important; border-left: 2px solid var(--violet); padding-left: 18px; margin-top: 25px; }
-
-.experience-section { background: #090a0f; }
-.timeline { max-width: 1000px; margin-left: auto; }
-.timeline-item { display: grid; grid-template-columns: 155px 24px 1fr; min-height: 190px; }
-.timeline-time { color: #706e78; font-size: 12px; padding-top: 5px; letter-spacing: .08em; }
-.timeline-dot { position: relative; }
-.timeline-dot::before { content: ""; position: absolute; left: 50%; top: 8px; transform: translateX(-50%); width: 7px; height: 7px; background: #b096ff; border-radius: 50%; box-shadow: 0 0 15px rgba(176,150,255,.55); }
-.timeline-dot::after { content: ""; position: absolute; top: 18px; bottom: -8px; left: 50%; width: 1px; background: linear-gradient(rgba(255,255,255,.16), rgba(255,255,255,.02)); }
-.timeline-item:last-child .timeline-dot::after { display: none; }
-.timeline-content { padding: 0 0 54px 35px; }
-.timeline-content h3 { margin: 0 0 7px; font-size: 25px; letter-spacing: -.03em; }
-.timeline-content h4 { margin: 0 0 15px; font-size: 14px; color: #a993ff; font-weight: 600; }
-.timeline-content p { color: var(--muted); margin: 0; line-height: 1.85; }
-
-.direction-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
-.direction { border: 1px solid var(--line); border-radius: 24px; padding: 29px; min-height: 220px; background: var(--panel); }
-.direction > span { color: #65636d; font-size: 12px; }
-.direction h3 { margin: 42px 0 12px; font-size: 24px; }
-.direction p { margin: 0; color: var(--muted); line-height: 1.75; }
-
-.principles-section { background: linear-gradient(180deg, #08090d, #0d0f16); }
-.principles-wrap { border: 1px solid var(--line); border-radius: 32px; background: rgba(255,255,255,.035); padding: 54px; display: grid; grid-template-columns: .75fr 1.25fr; gap: 80px; }
-.principles-wrap ol { list-style: none; margin: 0; padding: 0; }
-.principles-wrap li { display: grid; grid-template-columns: 45px 1fr; gap: 18px; padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,.075); }
-.principles-wrap li:last-child { border-bottom: 0; }
-.principles-wrap li > span { color: #65636d; font-size: 12px; }
-.principles-wrap strong { font-size: 18px; }
-.principles-wrap p { color: var(--muted); margin: 8px 0 0; line-height: 1.75; }
-
-.contact { min-height: 700px; position: relative; display: grid; place-items: center; text-align: center; overflow: hidden; }
-.contact-glow { position: absolute; width: 800px; height: 800px; border-radius: 50%; bottom: -600px; background: radial-gradient(circle, rgba(128,88,255,.52), transparent 68%); filter: blur(13px); }
-.contact-inner { position: relative; z-index: 2; }
-.contact h2 { margin: 28px auto; max-width: 1000px; font-size: clamp(42px, 6vw, 76px); line-height: 1.12; letter-spacing: -.06em; }
-.contact p { color: var(--muted); }
-.contact-actions { justify-content: center; }
-.contact-note { margin-top: 34px; color: #686670; font-size: 12px; }
-
-footer { min-height: 90px; width: min(calc(100% - 52px), var(--max)); margin: 0 auto; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; color: #64626c; font-size: 11px; }
-.toast { position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 20px); opacity: 0; z-index: 80; background: #f5f1ea; color: #090a0e; padding: 12px 18px; border-radius: 12px; font-size: 13px; font-weight: 700; transition: .25s ease; pointer-events: none; }
-.toast.show { opacity: 1; transform: translate(-50%, 0); }
-
-.reveal { opacity: 0; transform: translateY(25px); transition: opacity .7s ease, transform .7s ease; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-.delay-1 { transition-delay: .08s; }
-.delay-2 { transition-delay: .16s; }
-.delay-3 { transition-delay: .24s; }
-
-@media (max-width: 980px) {
-  .hero { grid-template-columns: 1fr; gap: 50px; }
-  .hero-card { width: min(100%, 620px); min-height: 430px; }
-  .portrait-monogram { height: 220px; }
-  .portrait-monogram small { bottom: 22px; }
-  .capability-grid { grid-template-columns: repeat(2,1fr); }
-  .about-grid { gap: 55px; }
-  .principles-wrap { grid-template-columns: 1fr; gap: 40px; }
+.smart-title > span {
+  display: inline-block;
+  white-space: nowrap;
 }
-
+.sticky-title h2 { font-size: clamp(38px, 4vw, 58px); }
 @media (max-width: 720px) {
-  .section-pad { padding-left: 18px; padding-right: 18px; }
-  .section { padding-top: 92px; padding-bottom: 92px; }
-  .site-header { top: 11px; width: calc(100% - 22px); }
-  .menu-toggle { display: block; position: relative; z-index: 3; }
-  .nav { display: none; position: absolute; top: 70px; left: 0; right: 0; flex-direction: column; align-items: stretch; padding: 10px; border: 1px solid var(--line); border-radius: 17px; background: rgba(10,11,16,.96); box-shadow: 0 25px 60px rgba(0,0,0,.5); }
-  .nav.open { display: flex; }
-  .nav a { padding: 13px; }
-  .nav .nav-cta { margin: 4px 0 0; text-align: center; }
-  .hero { padding-top: 120px; }
-  .hero h1 { font-size: clamp(53px, 16vw, 72px); }
-  .hero-card { min-height: 400px; padding: 20px; }
-  .portrait-monogram span { font-size: 82px; }
-  .hero-card h2 { font-size: 26px; }
-  .scroll-hint { display: none; }
-  .metrics { width: calc(100% - 28px); grid-template-columns: repeat(2,1fr); }
-  .metric { min-height: 120px; padding: 24px 20px; }
-  .metric:nth-child(3) { border-left: 0; border-top: 1px solid rgba(255,255,255,.08); }
-  .metric:nth-child(4) { border-top: 1px solid rgba(255,255,255,.08); }
-  .metric strong { font-size: 37px; }
-  .section-heading { grid-template-columns: 1fr; gap: 18px; }
-  .section-heading p { justify-self: start; }
-  .about-grid { grid-template-columns: 1fr; gap: 35px; }
-  .sticky-title { position: static; }
-  .capability-grid { grid-template-columns: 1fr; }
-  .capability-card { min-height: 340px; }
-  .case-card { grid-template-columns: 1fr; padding: 25px; }
-  .case-results, .case-results.compact { grid-template-columns: repeat(2,1fr); }
-  .case-meta { flex-direction: column; gap: 7px; }
-  .timeline { margin: 0; }
-  .timeline-item { grid-template-columns: 1fr; min-height: auto; border-left: 1px solid rgba(255,255,255,.1); margin-left: 8px; padding-left: 23px; }
-  .timeline-dot { display: none; }
-  .timeline-content { padding: 11px 0 48px; }
-  .direction-grid { grid-template-columns: 1fr; }
-  .principles-wrap { padding: 30px; }
-  .contact { min-height: 630px; }
-  .contact h2 { font-size: 43px; }
-  footer { padding: 28px 0; gap: 15px; flex-direction: column; }
+  .section-heading h2, .sticky-title h2, .contact h2, .principles-wrap h2 {
+    font-size: 36px;
+    line-height: 1.14;
+    letter-spacing: -.045em;
+  }
+  .hero h1 { font-size: 50px; line-height: .98; }
+  .case-main h3 { font-size: 27px; line-height: 1.28; }
+  .timeline-content h3 { font-size: 19px; line-height: 1.35; }
+  .direction h3 { line-height: 1.35; }
+}
+@media (max-width: 380px) {
+  .section-heading h2, .sticky-title h2, .contact h2, .principles-wrap h2 { font-size: 33px; }
+  .hero h1 { font-size: 46px; }
+  .case-main h3 { font-size: 25px; }
 }
 
-@media (max-width: 440px) {
-  .brand-text { font-size: 14px; }
-  .hero-statement { font-size: 23px; }
-  .hero-desc { font-size: 14px; }
-  .case-results, .case-results.compact { grid-template-columns: 1fr 1fr; }
-  .about-content blockquote { font-size: 20px; }
-}
-</style>
+@media (prefers-reduced-motion:reduce) {
+  html { scroll-behavior:auto; }
+  *,*::before,*::after { animation:none!important; transition:none!important; }
+  .reveal { opacity:1; transform:none; }
+}</style>
 </head>
-<body>
+<body id="top">
 <div aria-hidden="true" class="noise"></div>
 <div aria-hidden="true" class="spotlight"></div>
-<header class="site-header" id="top">
-<a aria-label="TOP 十年首页" class="brand" href="#top">
-<span class="brand-mark">T</span>
-<span class="brand-text">TOP 十年</span>
-</a>
-<button aria-expanded="false" aria-label="打开导航" class="menu-toggle">
-<span></span><span></span>
-</button>
-<nav aria-label="主导航" class="nav">
+<header class="site-header">
+<a class="brand" href="#top"><span class="brand-mark">T</span><span>TOP 十年</span></a>
+<button aria-label="打开菜单" class="menu-toggle" type="button"><span></span><span></span></button>
+<nav class="nav">
 <a href="#about">关于我</a>
 <a href="#results">成绩</a>
 <a href="#cases">案例</a>
@@ -302,58 +312,31 @@ footer { min-height: 90px; width: min(calc(100% - 52px), var(--max)); margin: 0 
 <div aria-hidden="true" class="hero-orbit orbit-two"></div>
 <div class="hero-copy reveal">
 <div class="eyebrow"><span></span> BASE SHENZHEN · GREATER BAY AREA</div>
-<h1>
-          我不只把内容<br/>
-<span class="gradient-text">做出来。</span>
-</h1>
+<h1 class="smart-title"><span>我不只把内容</span><span class="gradient-text">做出来。</span></h1>
 <p class="hero-statement">我更关心，它最后能不能变成生意。</p>
 <p class="hero-desc">我是TOP（梁俊铭），商业IP操盘手，长期聚焦内容营销与品牌战略。擅长通过定位、选题策划、流量型与变现型脚本、知识付费产品搭建和品牌营销策略，帮助创始人及企业把内容做成增长、信任与商业化结果。</p>
-<div class="hero-actions">
-<a class="button primary" href="#cases">看代表案例 <span>↘</span></a>
-
-</div>
+<div class="hero-actions"><a class="button primary" href="#cases">看代表案例 <span>↘</span></a></div>
 </div>
 <aside aria-label="个人信息卡片" class="hero-card reveal delay-1">
-<div class="portrait-monogram">
-<span>TOP</span>
-<small>十年</small>
-</div>
+<div class="portrait-monogram"><span>TOP</span><small>十年</small></div>
 <div class="hero-card-copy">
 <div class="status"><i></i> Open for meaningful work</div>
-<h2>商业IP操盘手<br/>人物访谈者<br/>项目PMO</h2>
-<div class="tag-row">
-<span>内容 × 商业</span>
-<span>大湾区</span>
-<span>New Money</span>
-</div>
+<h2 class="smart-title"><span>商业IP操盘手</span><span>人物访谈者</span><span>项目PMO</span></h2>
+<div class="tag-row"><span>内容 × 商业</span><span>大湾区</span><span>New Money</span></div>
 </div>
 </aside>
 <div aria-hidden="true" class="scroll-hint"><span></span>SCROLL</div>
 </section>
 <section aria-label="核心成绩" class="metrics" id="results">
-<div class="metric reveal">
-<strong data-count="1" data-suffix="亿+">0</strong>
-<span>精准内容累计播放</span>
-</div>
-<div class="metric reveal delay-1">
-<strong data-count="500" data-suffix="+">0</strong>
-<span>累计线上付费学员</span>
-</div>
-<div class="metric reveal delay-2">
-<strong data-count="20" data-suffix="+">0</strong>
-<span>线下IP孵化</span>
-</div>
-<div class="metric reveal delay-3">
-<strong data-count="200" data-suffix="万">0</strong>
-<span>公司年营收规模</span>
-</div>
+<div class="metric reveal"><strong data-count="1" data-suffix="亿+">0</strong><span>精准内容累计播放</span></div>
+<div class="metric reveal delay-1"><strong data-count="500" data-suffix="+">0</strong><span>累计线上付费学员</span></div>
+<div class="metric reveal delay-2"><strong data-count="20" data-suffix="+">0</strong><span>线下IP孵化</span></div>
+<div class="metric reveal delay-3"><strong data-count="200" data-suffix="万">0</strong><span>公司年营收规模</span></div>
 </section>
 <section class="section section-pad" id="about">
 <div class="section-kicker reveal">01 / ABOUT</div>
 <div class="about-grid">
-<div class="sticky-title reveal">
-<h2>我擅长的，<br/>从来不只是流量。</h2>
-</div>
+<div class="sticky-title reveal"><h2 class="smart-title"><span>我擅长的，</span><span>从来不只是流量。</span></h2></div>
 <div class="about-content">
 <p class="lead reveal">我是TOP（梁俊铭），商业IP操盘手，核心方向是内容营销与品牌战略。我做的不是单点内容执行，而是从定位、选题、脚本、产品到私域与商业化的完整链路。</p>
 <p class="reveal">我擅长账号定位、选题策划、流量型与变现型文案脚本、知识付费产品搭建和品牌营销策略，能够把创始人的专业能力、人生经历和业务优势，转化为可传播、可承接、可成交的内容资产。</p>
@@ -364,248 +347,75 @@ footer { min-height: 90px; width: min(calc(100% - 52px), var(--max)); margin: 0 
 </section>
 <section class="section section-pad capabilities-section">
 <div class="section-kicker reveal">02 / CAPABILITIES</div>
-<div class="section-heading reveal">
-<h2>四种能力，放在同一个人身上。</h2>
-<p>这也是我与普通编导、运营或项目经理最大的区别。</p>
-</div>
+<div class="section-heading reveal"><h2 class="smart-title"><span>四种能力，</span><span>放在同一个人身上。</span></h2><p>这也是我与普通编导、运营或项目经理最大的区别。</p></div>
 <div class="capability-grid">
-<article class="capability-card reveal">
-<div class="cap-index">01</div>
-<h3>懂创始人</h3>
-<p>做过老板和合伙人，理解创始人为什么会同时想做很多事，也知道什么时候应该追问、劝停和做减法。</p>
-<ul><li>个人定位与表达提炼</li><li>注意力与项目优先级</li><li>合作边界与关键决策</li></ul>
-</article>
-<article class="capability-card reveal delay-1">
-<div class="cap-index">02</div>
-<h3>懂内容</h3>
-<p>能从一个人的经历里找到可传播的故事、观点和冲突，并把访谈、口播和长内容拆成多平台可用的内容。</p>
-<ul><li>选题、脚本与访谈大纲</li><li>拍摄、后期与内容结构</li><li>账号定位与内容体系</li></ul>
-</article>
-<article class="capability-card reveal delay-2">
-<div class="cap-index">03</div>
-<h3>懂商业</h3>
-<p>做过课程、咨询、代运营、IP孵化和人物访谈服务，清楚内容如何接到产品、私域、成交和交付。</p>
-<ul><li>高客单产品设计</li><li>私域承接与销售路径</li><li>交付标准与版权边界</li></ul>
-</article>
-<article class="capability-card reveal delay-3">
-<div class="cap-index">04</div>
-<h3>懂项目PMO</h3>
-<p>受过新能源头部企业研发项目管理训练，也在创业团队里长期处理多人、多节点、多供应商与高频变化。</p>
-<ul><li>目标拆解与节点推进</li><li>跨团队、供应商协同</li><li>风险预警与项目复盘</li></ul>
-</article>
+<article class="capability-card reveal"><div class="cap-index">01</div><h3>懂创始人</h3><p>做过老板和合伙人，理解创始人为什么会同时想做很多事，也知道什么时候应该追问、劝停和做减法。</p><ul><li>个人定位与表达提炼</li><li>注意力与项目优先级</li><li>合作边界与关键决策</li></ul></article>
+<article class="capability-card reveal delay-1"><div class="cap-index">02</div><h3>懂内容</h3><p>能从一个人的经历里找到可传播的故事、观点和冲突，并把访谈、口播和长内容拆成多平台可用的内容。</p><ul><li>选题、脚本与访谈大纲</li><li>拍摄、后期与内容结构</li><li>账号定位与内容体系</li></ul></article>
+<article class="capability-card reveal delay-2"><div class="cap-index">03</div><h3>懂商业</h3><p>做过课程、咨询、代运营、IP孵化和人物访谈服务，清楚内容如何接到产品、私域、成交和交付。</p><ul><li>高客单产品设计</li><li>私域承接与销售路径</li><li>交付标准与版权边界</li></ul></article>
+<article class="capability-card reveal delay-3"><div class="cap-index">04</div><h3>懂项目PMO</h3><p>受过新能源头部企业研发项目管理训练，也在创业团队里长期处理多人、多节点、多供应商与高频变化。</p><ul><li>目标拆解与节点推进</li><li>跨团队、供应商协同</li><li>风险预警与项目复盘</li></ul></article>
 </div>
 </section>
 <section class="section section-pad cases-section" id="cases">
 <div class="section-kicker reveal">03 / SELECTED WORK</div>
-<div class="section-heading reveal">
-<h2>做过的项目，比头衔更能说明问题。</h2>
-<p>以下不是“参与过”，而是我真正承担过定位、内容、统筹、转化或交付的项目。</p>
-</div>
+<div class="section-heading reveal"><h2 class="smart-title"><span>做过的项目，</span><span>比头衔更能</span><span>说明问题。</span></h2><p>以下不是“参与过”，而是我真正承担过定位、内容、统筹、转化或交付的项目。</p></div>
 <div class="case-list">
-<article class="case-card featured reveal">
-<div class="case-number">01</div>
-<div class="case-main">
-<div class="case-meta"><span>商业IP · 知识付费</span><span>乐乐同学（深圳）文化传媒有限公司｜TOP流量新势力</span></div>
-<h3>两个月从0到1，跑通商业IP的流量、产品与变现闭环。</h3>
-<p>负责账号定位、选题策划、脚本编写、IP出镜、运营与产品策略；参与公司从0到1的产品体系、团队组织、私域、销售和项目交付搭建。</p>
-<div class="case-results">
-<div><strong>100万</strong><span>累计变现</span></div>
-<div><strong>近10万</strong><span>全网粉丝</span></div>
-<div><strong>7,000+</strong><span>私域进线</span></div>
-<div><strong>500万+</strong><span>单条最高播放</span></div>
-</div>
-</div>
-</article>
-<article class="case-card reveal">
-<div class="case-number">02</div>
-<div class="case-main">
-<div class="case-meta"><span>商业IP · 非标品</span><span>公子周的觉茶</span></div>
-<h3>从0起号，把香港人文内容接到茶品牌B端生意。</h3>
-<p>负责账号定位、选题策划、脚本编写、后期制作、产品策略与运营；3个月完成40条视频，打通“公转私—产品转化”的完整链路。</p>
-<div class="case-results compact">
-<div><strong>1.3万</strong><span>全网粉丝</span></div>
-<div><strong>65万</strong><span>月均播放</span></div>
-<div><strong>300万+</strong><span>B端累计变现</span></div>
-</div>
-</div>
-</article>
-<article class="case-card reveal">
-<div class="case-number">03</div>
-<div class="case-main">
-<div class="case-meta"><span>企业家访谈 · 大湾区</span><span>E董会</span></div>
-<h3>4个月从0起号，连接大湾区企业家与TOP级EMBA圈层。</h3>
-<p>负责账号定位、选题策划、脚本编写、后期制作与运营；累计吸引200位优质大湾区企业家加入，采访20+知名企业家，并覆盖北大汇丰、香港城市大学、长江商学院、复旦大学、厦门大学、新加坡国立大学等EMBA圈层。</p>
-<div class="case-results compact">
-<div><strong>200位</strong><span>优质企业家加入</span></div>
-<div><strong>20+</strong><span>知名企业家采访</span></div>
-<div><strong>多所</strong><span>TOP级EMBA商学院</span></div>
-</div>
-</div>
-</article>
-<article class="case-card new-money reveal">
-<div class="case-number">04</div>
-<div class="case-main">
-<div class="case-meta"><span>长期个人项目</span><span>New Money 人物访谈</span></div>
-<h3>访谈100位New Money，记录年轻创业者的财富跃迁。</h3>
-<p>由我发起并主导嘉宾筛选、前采、故事挖掘、访谈大纲、现场串联、后期结构和全网发布。聚焦年轻创业者、企业家、新贵与新兴产业，已覆盖上市企业家、CEO、AI创业者、投资人、金融、Web3与跨境出海从业者。</p>
-<p class="case-quote">我不只记录结果，更关心一个人走到今天的关键选择、商业判断与时代机会。</p>
-</div>
-</article>
+<article class="case-card featured reveal"><div class="case-number">01</div><div class="case-main"><div class="case-meta"><span>商业IP · 知识付费</span><span>乐乐同学（深圳）文化传媒有限公司｜TOP流量新势力</span></div><h3 class="smart-title"><span>两个月从0到1，</span><span>跑通商业IP的</span><span>流量、产品与</span><span>变现闭环。</span></h3><p>负责账号定位、选题策划、脚本编写、IP出镜、运营与产品策略；参与公司从0到1的产品体系、团队组织、私域、销售和项目交付搭建。</p><div class="case-results"><div><strong>100万</strong><span>累计变现</span></div><div><strong>近10万</strong><span>全网粉丝</span></div><div><strong>7,000+</strong><span>私域进线</span></div><div><strong>500万+</strong><span>单条最高播放</span></div></div></div></article>
+<article class="case-card reveal"><div class="case-number">02</div><div class="case-main"><div class="case-meta"><span>商业IP · 非标品</span><span>公子周的觉茶</span></div><h3 class="smart-title"><span>从0起号，</span><span>把香港人文内容</span><span>接到茶品牌</span><span>B端生意。</span></h3><p>负责账号定位、选题策划、脚本编写、后期制作、产品策略与运营；3个月完成40条视频，打通“公转私—产品转化”的完整链路。</p><div class="case-results compact"><div><strong>1.3万</strong><span>全网粉丝</span></div><div><strong>65万</strong><span>月均播放</span></div><div><strong>300万+</strong><span>B端累计变现</span></div></div></div></article>
+<article class="case-card reveal"><div class="case-number">03</div><div class="case-main"><div class="case-meta"><span>企业家访谈 · 大湾区</span><span>E董会</span></div><h3 class="smart-title"><span>4个月从0起号，</span><span>连接大湾区</span><span>企业家与TOP级</span><span>EMBA圈层。</span></h3><p>负责账号定位、选题策划、脚本编写、后期制作与运营；累计吸引200位优质大湾区企业家加入，采访20+知名企业家，并覆盖北大汇丰、香港城市大学、长江商学院、复旦大学、厦门大学、新加坡国立大学等EMBA圈层。</p><div class="case-results compact"><div><strong>200位</strong><span>优质企业家加入</span></div><div><strong>20+</strong><span>知名企业家采访</span></div><div><strong>多所</strong><span>TOP级EMBA商学院</span></div></div></div></article>
+<article class="case-card reveal"><div class="case-number">04</div><div class="case-main"><div class="case-meta"><span>大学创业 · 游戏服务</span><span>游戏工作室｜2019—2021（大学期间）</span></div><h3 class="smart-title"><span>大学期间从0发起</span><span>游戏工作室，</span><span>独立跑通获客、</span><span>销售与服务交付。</span></h3><p>围绕游戏陪玩、代练与直播获客开展业务，负责项目发起、流量获取、客户转化、人员安排和服务交付，在校期间完成第一次完整的创业实践。</p><div class="case-results compact"><div><strong>30万+</strong><span>累计收入/利润</span></div><div><strong>2年</strong><span>持续运营周期</span></div><div><strong>0—1</strong><span>独立搭建业务闭环</span></div></div></div></article>
+<article class="case-card new-money reveal"><div class="case-number">05</div><div class="case-main"><div class="case-meta"><span>长期个人项目</span><span>New Money 人物访谈</span></div><h3 class="smart-title"><span>访谈100位</span><span>New Money，</span><span>记录年轻创业者的</span><span>财富跃迁。</span></h3><p>由我发起并主导嘉宾筛选、前采、故事挖掘、访谈大纲、现场串联、后期结构和全网发布。聚焦年轻创业者、企业家、新贵与新兴产业，已覆盖上市企业家、CEO、AI创业者、投资人、金融、Web3与跨境出海从业者。</p><p class="case-quote">我不只记录结果，更关心一个人走到今天的关键选择、商业判断与时代机会。</p></div></article>
 </div>
 </section>
 <section class="section section-pad experience-section" id="experience">
 <div class="section-kicker reveal">04 / JOURNEY</div>
-<div class="section-heading reveal">
-<h2>每一段经历，都在补同一块能力。</h2>
-</div>
+<div class="section-heading reveal"><h2 class="smart-title"><span>每一段经历，</span><span>都在补同一块能力。</span></h2></div>
 <div class="timeline">
-<article class="timeline-item reveal">
-<div class="timeline-time">2024.11 — NOW</div>
-<div class="timeline-dot"></div>
-<div class="timeline-content">
-<h3>铭创智远（深圳）咨询有限公司</h3>
-<h4>创始人 · 商业IP内容营销顾问 · New Money人物访谈者</h4>
-<p>开展商业IP咨询、品牌策略、人物访谈和高客单内容服务，主导New Money人物访谈系列。</p>
-</div>
-</article>
-<article class="timeline-item reveal">
-<div class="timeline-time">2023.10 — 2024.11</div>
-<div class="timeline-dot"></div>
-<div class="timeline-content">
-<h3>乐乐同学（深圳）文化传媒有限公司</h3>
-<h4>商业IP操盘手 · 合伙人</h4>
-<p>参与公司0到1，完成业务产品体系、团队组织、业务流程、私域体系与IP项目交付搭建，公司年营收约200万元。</p>
-</div>
-</article>
-<article class="timeline-item reveal">
-<div class="timeline-time">2022.07 — 2023.06</div>
-<div class="timeline-dot"></div>
-<div class="timeline-content">
-<h3>深圳正浩创新科技（EcoFlow）</h3>
-<h4>研发项目管理</h4>
-<p>负责研发项目管理，在多人、多节点和强标准环境中推进产品项目，协调研发、测试、资源、节点与交付风险。</p>
-</div>
-</article>
-
+<article class="timeline-item reveal"><div class="timeline-time">2024.11 — NOW</div><div class="timeline-dot"></div><div class="timeline-content"><h3 class="smart-title"><span>铭创智远（深圳）</span><span>咨询有限公司</span></h3><h4>创始人 · 商业IP内容营销顾问 · New Money人物访谈者</h4><p>开展商业IP咨询、品牌策略、人物访谈和高客单内容服务，主导New Money人物访谈系列。</p></div></article>
+<article class="timeline-item reveal"><div class="timeline-time">2023.10 — 2024.11</div><div class="timeline-dot"></div><div class="timeline-content"><h3 class="smart-title"><span>乐乐同学（深圳）</span><span>文化传媒有限公司</span></h3><h4>商业IP操盘手 · 合伙人</h4><p>参与公司0到1，完成业务产品体系、团队组织、业务流程、私域体系与IP项目交付搭建，公司年营收约200万元。</p></div></article>
+<article class="timeline-item reveal"><div class="timeline-time">2022.07 — 2023.06</div><div class="timeline-dot"></div><div class="timeline-content"><h3 class="smart-title"><span>深圳正浩创新科技</span><span>（EcoFlow）</span></h3><h4>研发项目管理</h4><p>负责研发项目管理，在多人、多节点和强标准环境中推进产品项目，协调研发、测试、资源、节点与交付风险。</p></div></article>
+<article class="timeline-item reveal"><div class="timeline-time">2019 — 2021</div><div class="timeline-dot"></div><div class="timeline-content"><h3 class="smart-title"><span>大学游戏工作室</span></h3><h4>发起人｜大学期间</h4><p>围绕游戏陪玩、代练和直播获客开展创业实践，独立负责获客、销售、人员安排与服务交付，两年累计收入/利润约30万+。</p></div></article>
 </div>
 </section>
 <section class="section section-pad direction-section">
 <div class="section-kicker reveal">05 / WORK WITH ME</div>
-<div class="section-heading reveal">
-<h2>更适合我的，不是“帮忙做点内容”。</h2>
-<p>而是这些需要内容、商业和项目能力同时在线的合作。</p>
-</div>
+<div class="section-heading reveal"><h2 class="smart-title"><span>更适合我的，</span><span>不是“帮忙</span><span>做点内容”。</span></h2><p>而是这些需要内容、商业和项目能力同时在线的合作。</p></div>
 <div class="direction-grid">
-<article class="direction reveal"><span>01</span><h3>商业IP战略与内容营销</h3><p>从定位、选题、表达、内容体系，到产品、私域和成交路径。</p></article>
-<article class="direction reveal delay-1"><span>02</span><h3>企业家 / 创始人人物访谈</h3><p>梳理人生故事、商业判断与个人标签，形成可持续传播的内容资产。</p></article>
-<article class="direction reveal delay-2"><span>03</span><h3>高客单产品与服务产品化</h3><p>把非标服务讲清楚、卖清楚、交付清楚，同时保护内容和合作边界。</p></article>
-<article class="direction reveal delay-3"><span>04</span><h3>创始人幕僚型项目PMO</h3><p>管理优先级、目标、节点、责任人与外部资源，把复杂项目从想法推进到结果。</p></article>
+<article class="direction reveal"><span>01</span><h3 class="smart-title"><span>商业IP战略</span><span>与内容营销</span></h3><p>从定位、选题、表达、内容体系，到产品、私域和成交路径。</p></article>
+<article class="direction reveal delay-1"><span>02</span><h3 class="smart-title"><span>企业家 / 创始人</span><span>人物访谈</span></h3><p>梳理人生故事、商业判断与个人标签，形成可持续传播的内容资产。</p></article>
+<article class="direction reveal delay-2"><span>03</span><h3 class="smart-title"><span>高客单产品</span><span>与服务产品化</span></h3><p>把非标服务讲清楚、卖清楚、交付清楚，同时保护内容和合作边界。</p></article>
+<article class="direction reveal delay-3"><span>04</span><h3 class="smart-title"><span>创始人幕僚型</span><span>项目PMO</span></h3><p>管理优先级、目标、节点、责任人与外部资源，把复杂项目从想法推进到结果。</p></article>
 </div>
 </section>
 <section class="section section-pad principles-section">
-<div class="principles-wrap reveal">
-<div>
-<div class="section-kicker">06 / PRINCIPLES</div>
-<h2>我做事的四个底线。</h2>
-</div>
-<ol>
-<li><span>01</span><div><strong>不把播放量当最终结果。</strong><p>流量要能进入信任、产品和成交，否则只是热闹。</p></div></li>
-<li><span>02</span><div><strong>不靠所有人长期熬夜解决协同。</strong><p>高能量不是混乱的理由，真正的效率来自责任、节点和预警。</p></div></li>
-<li><span>03</span><div><strong>不为了接单承诺不懂的事。</strong><p>做过什么就说什么，缺的经验可以补，但不靠包装建立信任。</p></div></li>
-<li><span>04</span><div><strong>不做只有一次交付、没有长期积累的项目。</strong><p>每一次内容、关系和案例，都应该成为下一次增长的基础。</p></div></li>
-</ol>
-</div>
+<div class="principles-wrap reveal"><div><div class="section-kicker">06 / PRINCIPLES</div><h2 class="smart-title"><span>我做事的</span><span>四个底线。</span></h2></div><ol><li><span>01</span><div><strong>不把播放量当最终结果。</strong><p>流量要能进入信任、产品和成交，否则只是热闹。</p></div></li><li><span>02</span><div><strong>不靠所有人长期熬夜解决协同。</strong><p>高能量不是混乱的理由，真正的效率来自责任、节点和预警。</p></div></li><li><span>03</span><div><strong>不为了接单承诺不懂的事。</strong><p>做过什么就说什么，缺的经验可以补，但不靠包装建立信任。</p></div></li><li><span>04</span><div><strong>不做只有一次交付、没有长期积累的项目。</strong><p>每一次内容、关系和案例，都应该成为下一次增长的基础。</p></div></li></ol></div>
 </section>
 <section class="contact section-pad" id="contact">
 <div aria-hidden="true" class="contact-glow"></div>
 <div class="contact-inner reveal">
 <div class="eyebrow"><span></span> LET'S BUILD SOMETHING MEANINGFUL</div>
-<h2>好项目，不一定从一份方案开始。<br/>也可以先从一次真实的聊天开始。</h2>
+<h2 class="smart-title"><span>好项目，</span><span>不一定从一份</span><span>方案开始。</span><span>也可以先从一次</span><span>真实的聊天开始。</span></h2>
 <p>目前 base 深圳，可在大湾区长期工作，也可全国及海外出差。</p>
-<div class="contact-actions">
-<button class="button primary copy-wechat" data-wechat="TOP-8886888">复制微信：TOP-8886888</button>
-<a class="button ghost" href="mailto:423093099@qq.com">发送邮件</a>
-
-</div>
+<div class="contact-actions"><button class="button primary copy-wechat" data-wechat="TOP-8886888">复制微信：TOP-8886888</button><a class="button ghost" href="mailto:423093099@qq.com">发送邮件</a></div>
 <div class="contact-note">梁俊铭 · TOP / 十年 · 深圳</div>
 </div>
 </section>
 </main>
-<footer>
-<span>© 2026 TOP 十年</span>
-<span>Content × Business × People</span>
-<a href="#top">BACK TO TOP ↑</a>
-</footer>
+<footer><span>© 2026 TOP 十年</span><span>Content × Business × People</span><a href="#top">BACK TO TOP ↑</a></footer>
 <div aria-live="polite" class="toast" role="status">微信号已复制</div>
-<script>const toggle = document.querySelector('.menu-toggle');
-const nav = document.querySelector('.nav');
-
-if (toggle && nav) {
-  toggle.addEventListener('click', () => {
-    const isOpen = nav.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', String(isOpen));
-  });
-  nav.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      nav.classList.remove('open');
-      toggle.setAttribute('aria-expanded', 'false');
-    });
-  });
-}
-
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12 });
-
-document.querySelectorAll('.reveal').forEach((item) => revealObserver.observe(item));
-
-const counters = document.querySelectorAll('[data-count]');
-const counterObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (!entry.isIntersecting) return;
-    const el = entry.target;
-    const target = Number(el.dataset.count);
-    const suffix = el.dataset.suffix || '';
-    const duration = 1200;
-    const start = performance.now();
-    const tick = (now) => {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = `${Math.floor(target * eased)}${suffix}`;
-      if (progress < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-    counterObserver.unobserve(el);
-  });
-}, { threshold: 0.5 });
-
-counters.forEach((counter) => counterObserver.observe(counter));
-
-const copyButton = document.querySelector('.copy-wechat');
-const toast = document.querySelector('.toast');
-if (copyButton && toast) {
-  copyButton.addEventListener('click', async () => {
-    try {
-      await navigator.clipboard.writeText(copyButton.dataset.wechat);
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 1800);
-    } catch (error) {
-      copyButton.textContent = `微信：${copyButton.dataset.wechat}`;
-    }
-  });
-}
-
-const spotlight = document.querySelector('.spotlight');
-if (spotlight && window.matchMedia('(pointer: fine)').matches) {
-  window.addEventListener('pointermove', (event) => {
-    spotlight.style.left = `${event.clientX}px`;
-    spotlight.style.top = `${event.clientY}px`;
-  });
-}
+<script>
+const toggle=document.querySelector('.menu-toggle');
+const nav=document.querySelector('.nav');
+toggle?.addEventListener('click',()=>{toggle.classList.toggle('active');nav.classList.toggle('open');});
+nav?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{toggle.classList.remove('active');nav.classList.remove('open');}));
+const reveals=document.querySelectorAll('.reveal');
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.08});
+reveals.forEach(el=>observer.observe(el));
+const counters=document.querySelectorAll('[data-count]');
+const counterObserver=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(!entry.isIntersecting)return;const el=entry.target;const target=Number(el.dataset.count);const suffix=el.dataset.suffix||'';const start=performance.now();const duration=1100;const step=now=>{const p=Math.min((now-start)/duration,1);const eased=1-Math.pow(1-p,3);el.textContent=Math.round(target*eased)+suffix;if(p<1)requestAnimationFrame(step);};requestAnimationFrame(step);counterObserver.unobserve(el);});},{threshold:.5});
+counters.forEach(el=>counterObserver.observe(el));
+const copyBtn=document.querySelector('.copy-wechat');
+const toast=document.querySelector('.toast');
+copyBtn?.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(copyBtn.dataset.wechat);toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1600);}catch(e){window.prompt('复制微信号：',copyBtn.dataset.wechat);}});
+window.addEventListener('pointermove',e=>{const s=document.querySelector('.spotlight');if(s){s.style.left=e.clientX+'px';s.style.top=e.clientY+'px';}});
 </script>
 </body></html>
