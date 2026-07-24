@@ -1,0 +1,55 @@
+name: Remove About Section
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/remove-about-section.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Remove section and renumber modules
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          path = Path('index.html')
+          html = path.read_text(encoding='utf-8')
+
+          html = html.replace('<a href="#about">关于我</a>\n', '')
+          html = re.sub(
+              r'<section class="section section-pad" id="about">.*?</section>\s*(?=<section class="section section-pad capabilities-section">)',
+              '',
+              html,
+              flags=re.S,
+          )
+
+          replacements = {
+              '02 / CAPABILITIES': '01 / CAPABILITIES',
+              '03 / SELECTED WORK': '02 / SELECTED WORK',
+              '04 / JOURNEY': '03 / JOURNEY',
+              '05 / WORK WITH ME': '04 / WORK WITH ME',
+              '06 / PRINCIPLES': '05 / PRINCIPLES',
+          }
+          for old, new in replacements.items():
+              html = html.replace(old, new)
+
+          path.write_text(html, encoding='utf-8')
+          PY
+      - name: Commit update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "Remove About module and renumber sections"
+          git push origin main
