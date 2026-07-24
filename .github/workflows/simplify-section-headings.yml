@@ -1,0 +1,69 @@
+name: Simplify Website Section Headings
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-headings:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace major section headings
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('index.html')
+          html = path.read_text(encoding='utf-8')
+
+          replacements = {
+              '<h1 class="smart-title"><span>我不只把内容</span><span class="gradient-text">做出来。</span></h1>':
+              '<h1 class="smart-title"><span class="gradient-text">把内容做成结果。</span></h1>',
+
+              '<div class="sticky-title reveal"><h2 class="smart-title"><span>内容、商业、项目，</span><span>我会放在一起看。</span></h2></div>':
+              '<div class="sticky-title reveal"><h2 class="smart-title"><span>把内容、商业与项目串起来。</span></h2></div>',
+
+              '<div class="section-heading reveal"><h2 class="smart-title"><span>四种能力，</span><span>放在同一个人身上。</span></h2><p>这也是我与普通编导、运营或项目经理最大的区别。</p></div>':
+              '<div class="section-heading reveal"><h2 class="smart-title"><span>四项能力，推动项目落地。</span></h2><p>这也是我与普通编导、运营或项目经理最大的区别。</p></div>',
+
+              '<div class="section-heading reveal"><h2 class="smart-title"><span>做过的项目，</span><span>比头衔更能</span><span>说明问题。</span></h2><p>以下不是“参与过”，而是我真正承担过定位、内容、统筹、转化或交付的项目。</p></div>':
+              '<div class="section-heading reveal"><h2 class="smart-title"><span>结果，比头衔更有说服力。</span></h2><p>以下不是“参与过”，而是我真正承担过定位、内容、统筹、转化或交付的项目。</p></div>',
+
+              '<div class="section-heading reveal"><h2 class="smart-title"><span>每一段经历，</span><span>都在补同一块能力。</span></h2></div>':
+              '<div class="section-heading reveal"><h2 class="smart-title"><span>每段经历，都在训练同一种能力。</span></h2></div>',
+
+              '<div class="section-heading reveal"><h2 class="smart-title"><span>更适合我的，</span><span>不是“帮忙</span><span>做点内容”。</span></h2><p>而是这些需要内容、商业和项目能力同时在线的合作。</p></div>':
+              '<div class="section-heading reveal"><h2 class="smart-title"><span>我适合参与这些长期项目。</span></h2><p>这些合作需要内容、商业和项目能力同时在线。</p></div>',
+
+              '<div class="principles-wrap reveal"><div><div class="section-kicker">06 / PRINCIPLES</div><h2 class="smart-title"><span>我做事的</span><span>四个底线。</span></h2></div>':
+              '<div class="principles-wrap reveal"><div><div class="section-kicker">06 / PRINCIPLES</div><h2 class="smart-title"><span>我做事有四个底线。</span></h2></div>',
+
+              '<h2 class="smart-title"><span>好项目，</span><span>不一定从一份</span><span>方案开始。</span><span>也可以先从一次</span><span>真实的聊天开始。</span></h2>':
+              '<h2 class="smart-title"><span>从一次真实交流开始。</span></h2>',
+          }
+
+          missing = []
+          for old, new in replacements.items():
+              if old not in html:
+                  missing.append(old[:80])
+              else:
+                  html = html.replace(old, new, 1)
+
+          if missing:
+              raise SystemExit('Missing expected heading patterns: ' + ' | '.join(missing))
+
+          path.write_text(html, encoding='utf-8')
+          PY
+          rm -f .github/workflows/simplify-section-headings.yml
+      - name: Commit heading updates
+        run: |
+          git config user.name "TOP Website Bot"
+          git config user.email "actions@github.com"
+          git add -A
+          git commit -m "Simplify all major website headings"
+          git push
