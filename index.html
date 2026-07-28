@@ -49,8 +49,8 @@ button{font:inherit}
 .menu-toggle{display:none;width:44px;height:44px;border:1px solid var(--line);border-radius:12px;background:rgba(8,25,54,.9);color:#fff;font-size:20px}
 .hero{position:relative;min-height:960px;padding:126px 0 36px;overflow:hidden}
 .hero::before{content:"";position:absolute;width:880px;height:880px;border:1px solid rgba(76,137,255,.18);border-radius:50%;right:-170px;top:70px;box-shadow:inset 0 0 130px rgba(39,125,255,.05);pointer-events:none}
-.hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:.95fr 1.05fr;align-items:center;min-height:545px}
-.hero-copy{padding:35px 0 44px;max-width:720px}
+.hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.08fr .92fr;align-items:center;min-height:545px}
+.hero-copy{position:relative;z-index:4;padding:35px 0 44px;max-width:720px}
 .hero-kicker{margin:0 0 22px;color:#6d9eff;font-size:12px;letter-spacing:.18em;font-weight:800}
 .hero h1{display:flex;align-items:center;gap:28px;margin:0;font-size:clamp(68px,7.2vw,116px);line-height:.94;letter-spacing:-.065em}
 .hero h1 .top-word{color:transparent;background:linear-gradient(180deg,#5bb5ff,#1d6fff 68%,#5e5cff);-webkit-background-clip:text;background-clip:text}
@@ -65,24 +65,24 @@ button{font:inherit}
 .button:hover{transform:translateY(-2px);border-color:var(--line-strong);background:rgba(12,38,81,.88)}
 .button.primary{border-color:transparent;background:linear-gradient(135deg,#348eff,#0864f2);box-shadow:0 14px 40px rgba(16,104,255,.3);font-weight:750}
 .button .circle{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.19)}
-.hero-visual{position:relative;align-self:stretch;min-height:560px;margin:0 -12px 0 -70px}
-.hero-visual::before{content:"";position:absolute;z-index:-1;width:610px;height:610px;border-radius:50%;left:50%;top:48%;transform:translate(-50%,-50%);background:radial-gradient(circle at 36% 30%,#75a7ff,#255ee7 46%,rgba(44,74,219,.1) 70%);filter:drop-shadow(0 0 75px rgba(52,101,255,.25))}
+.hero-visual{position:relative;z-index:1;align-self:stretch;min-height:540px;margin:0;overflow:visible}
+.hero-visual::before{content:"";position:absolute;z-index:-1;width:min(100%,560px);aspect-ratio:1;border-radius:50%;left:50%;top:49%;transform:translate(-50%,-50%);background:radial-gradient(circle at 36% 30%,#75a7ff,#255ee7 46%,rgba(44,74,219,.1) 70%);filter:drop-shadow(0 0 75px rgba(52,101,255,.25))}
 .hero-visual::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,rgba(2,7,18,.7),transparent 12%,transparent 72%,#020712 96%),linear-gradient(90deg,#020712 0%,transparent 18%,transparent 88%,rgba(2,7,18,.65))}
-.hero-portrait{position:absolute;z-index:1;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 45%;border-radius:36px;filter:saturate(1.08) contrast(1.03);mask-image:linear-gradient(to bottom,transparent 0%,#000 8%,#000 75%,transparent 98%)}
-.portrait-caption{position:absolute;z-index:3;right:3%;bottom:8%;text-align:right}
+.hero-portrait{position:absolute;z-index:1;left:50%;bottom:18px;width:min(96%,720px);height:auto;max-height:500px;object-fit:contain;object-position:center bottom;transform:translateX(-50%);border-radius:28px;filter:saturate(1.05) contrast(1.02);mask-image:linear-gradient(to bottom,transparent 0%,#000 9%,#000 82%,transparent 100%)}
+.portrait-caption{position:absolute;z-index:3;right:3%;bottom:3%;max-width:72%;padding:10px 14px;border:1px solid rgba(87,158,255,.2);border-radius:12px;background:rgba(2,10,26,.62);backdrop-filter:blur(10px);text-align:right}
 .portrait-caption strong{display:block;font-size:15px;letter-spacing:.02em}.portrait-caption span{display:block;margin-top:9px;color:#3698ff;font-size:13px}
 .metrics{position:relative;z-index:10;display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--line);border-radius:22px;background:linear-gradient(180deg,rgba(9,30,66,.92),rgba(3,16,36,.94));box-shadow:var(--glow);overflow:hidden;backdrop-filter:blur(18px)}
 .metric{display:grid;grid-template-columns:54px 1fr;align-items:center;gap:14px;min-height:116px;padding:22px 26px;position:relative}
 .metric:not(:last-child)::after{content:"";position:absolute;right:0;top:24%;bottom:24%;width:1px;background:var(--line)}
-.metric-icon{width:50px;height:50px;display:grid;place-items:center;border-radius:50%;background:radial-gradient(circle at 35% 30%,#163c8a,#06194a);color:#70b4ff;font-size:22px;box-shadow:inset 0 0 20px rgba(56,119,255,.22)}
+.metric-icon{width:50px;height:50px;display:grid;place-items:center;border-radius:50%;background:radial-gradient(circle at 35% 30%,#163c8a,#06194a);color:#70b4ff;font-size:13px;font-weight:850;letter-spacing:.04em;box-shadow:inset 0 0 20px rgba(56,119,255,.22)}
 .metric strong{display:block;font-size:28px;letter-spacing:-.04em}.metric span{display:block;margin-top:6px;color:#9aabc5;font-size:12px}
-.module-grid{position:relative;z-index:10;display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:14px}
+.module-grid{position:relative;z-index:10;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:14px}
 .module-card{min-height:190px;padding:24px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,rgba(9,29,62,.86),rgba(3,15,35,.9));transition:.3s;box-shadow:0 15px 55px rgba(0,0,0,.16)}
 .module-card:hover{transform:translateY(-5px);border-color:var(--line-strong);background:linear-gradient(145deg,rgba(13,43,92,.9),rgba(5,20,48,.92))}
 .module-card .index{color:#3897ff;font-size:22px;margin-right:10px}.module-card h3{display:inline;margin:0;font-size:20px}
 .module-card p{min-height:52px;margin:17px 0;color:#9bacbf;font-size:13px;line-height:1.75}
 .module-card a{display:flex;align-items:center;justify-content:space-between;color:#3d9cff;font-size:12px;font-weight:700}
-.module-symbol{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:linear-gradient(145deg,#358cff,#0757df);color:#fff;font-size:20px;box-shadow:0 11px 26px rgba(16,96,240,.28)}
+.module-symbol{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:linear-gradient(145deg,#358cff,#0757df);color:#fff;font-size:13px;font-weight:850;letter-spacing:.04em;box-shadow:0 11px 26px rgba(16,96,240,.28)}
 .section{padding:128px 0}
 .section-head{display:grid;grid-template-columns:1fr auto;gap:34px;align-items:end;margin-bottom:48px}
 .section-kicker{margin:0 0 15px;color:#3d98ff;font-size:11px;letter-spacing:.18em;font-weight:800}
@@ -135,7 +135,7 @@ footer{min-height:86px;display:flex;align-items:center;justify-content:space-bet
 .editor-btn{min-height:40px;padding:0 14px;border:1px solid var(--line);border-radius:10px;background:rgba(22,56,110,.5);color:#dbe9ff;font-size:12px;cursor:pointer}.editor-btn.primary{background:#247cff;border-color:transparent}.editor-status{color:#7290ba;font-size:11px;white-space:nowrap}
 .editing [data-edit]{outline:1px dashed rgba(86,173,255,.7);outline-offset:4px;border-radius:3px;background:rgba(42,125,255,.07);cursor:text}
 @media(max-width:1180px){
-  .nav{gap:24px}.hero-grid{grid-template-columns:1fr 1fr}.hero h1{font-size:72px}.hero-visual{margin-left:-30px}
+  .nav{gap:24px}.hero-grid{grid-template-columns:1.05fr .95fr}.hero h1{font-size:72px}
   .metrics{grid-template-columns:repeat(3,1fr)}.metric:nth-child(3)::after{display:none}.metric:nth-child(-n+3){border-bottom:1px solid var(--line)}
   .module-grid{grid-template-columns:repeat(3,1fr)}.capability-grid,.principles-grid,.cooperation-grid{grid-template-columns:repeat(2,1fr)}
 }
@@ -143,7 +143,7 @@ footer{min-height:86px;display:flex;align-items:center;justify-content:space-bet
   .shell{width:min(calc(100% - 32px),var(--max))}.site-header{height:72px}.menu-toggle{display:block}.header-cta{display:none}
   .nav{position:fixed;left:12px;right:12px;top:72px;display:flex;flex-direction:column;align-items:stretch;gap:0;padding:12px;border:1px solid var(--line);border-radius:16px;background:rgba(3,12,28,.97);opacity:0;transform:translateY(-10px);pointer-events:none;transition:.25s}.nav.open{opacity:1;transform:none;pointer-events:auto}.nav a{padding:13px}
   .hero{min-height:auto;padding-top:92px}.hero-grid{grid-template-columns:1fr}.hero-copy{padding-bottom:8px}.hero h1{font-size:clamp(54px,15vw,78px);gap:16px}.hero h1 b{font-size:.78em}.hero-roles{font-size:18px;word-spacing:4px;line-height:1.6}.hero-tags{font-size:16px;line-height:1.7}
-  .hero-visual{min-height:430px;margin:0 -16px}.hero-visual::before{width:430px;height:430px}.portrait-caption{right:8%;bottom:7%}
+  .hero-visual{min-height:410px;margin:0}.hero-visual::before{width:410px}.hero-portrait{width:min(100%,620px);max-height:390px;bottom:4px}.portrait-caption{right:2%;bottom:1%;max-width:82%}
   .metrics{grid-template-columns:repeat(2,1fr)}.metric{min-height:104px;padding:18px}.metric:nth-child(3)::after{display:block}.metric:nth-child(even)::after{display:none}.metric:nth-child(-n+4){border-bottom:1px solid var(--line)}
   .module-grid{grid-template-columns:1fr}.module-card{min-height:auto}.module-card p{min-height:0}
   .section{padding:90px 0}.section-head{grid-template-columns:1fr}.capability-grid,.principles-grid,.cooperation-grid{grid-template-columns:1fr}
@@ -152,7 +152,7 @@ footer{min-height:86px;display:flex;align-items:center;justify-content:space-bet
   footer{padding:24px 0;flex-direction:column;text-align:center}.editor-toolbar{flex-wrap:wrap}.editor-toolbar .help{flex-basis:100%}.editor-btn{flex:1}.editor-status{width:100%;text-align:center}
 }
 @media(max-width:480px){
-  .hero h1{font-size:50px}.hero h1 b{font-size:.7em}.hero-visual{min-height:350px}.metrics{grid-template-columns:1fr}.metric::after{display:none!important}.metric{border-bottom:1px solid var(--line)}
+  .hero h1{font-size:50px}.hero h1 b{font-size:.7em}.hero-visual{min-height:330px}.hero-portrait{max-height:320px}.portrait-caption{font-size:11px}.metrics{grid-template-columns:1fr}.metric::after{display:none!important}.metric{border-bottom:1px solid var(--line)}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none}*{transition:none!important}}
 </style>
@@ -195,18 +195,17 @@ footer{min-height:86px;display:flex;align-items:center;justify-content:space-bet
         </figure>
       </div>
       <section class="metrics reveal" aria-label="核心数据">
-        <div class="metric"><span class="metric-icon">▶</span><div><strong data-edit="metric-1-value">2亿+</strong><span data-edit="metric-1-label">全网播放量</span></div></div>
-        <div class="metric"><span class="metric-icon">●</span><div><strong data-edit="metric-2-value">50+</strong><span data-edit="metric-2-label">操盘IP或企业客户</span></div></div>
-        <div class="metric"><span class="metric-icon">▥</span><div><strong data-edit="metric-3-value">200万+</strong><span data-edit="metric-3-label">营收创造</span></div></div>
-        <div class="metric"><span class="metric-icon">♥</span><div><strong data-edit="metric-4-value">10万+</strong><span data-edit="metric-4-label">粉丝沉淀</span></div></div>
-        <div class="metric"><span class="metric-icon">★</span><div><strong data-edit="metric-5-value">100+</strong><span data-edit="metric-5-label">访谈 New Money</span></div></div>
+        <div class="metric"><span class="metric-icon">01</span><div><strong data-edit="metric-1-value">2亿+</strong><span data-edit="metric-1-label">全网播放量</span></div></div>
+        <div class="metric"><span class="metric-icon">02</span><div><strong data-edit="metric-2-value">50+</strong><span data-edit="metric-2-label">操盘IP或企业客户</span></div></div>
+        <div class="metric"><span class="metric-icon">03</span><div><strong data-edit="metric-3-value">200万+</strong><span data-edit="metric-3-label">营收创造</span></div></div>
+        <div class="metric"><span class="metric-icon">04</span><div><strong data-edit="metric-4-value">10万+</strong><span data-edit="metric-4-label">粉丝沉淀</span></div></div>
+        <div class="metric"><span class="metric-icon">05</span><div><strong data-edit="metric-5-value">100+</strong><span data-edit="metric-5-label">访谈 New Money</span></div></div>
       </section>
       <div class="module-grid reveal">
-        <article class="module-card"><span class="index">01</span><h3 data-edit="module-1-title">能力</h3><p data-edit="module-1-copy">四大能力模型，从内容到商业，全面驱动项目落地。</p><a href="#capabilities"><span>查看详情 →</span><span class="module-symbol">◆</span></a></article>
-        <article class="module-card"><span class="index">02</span><h3 data-edit="module-2-title">案例</h3><p data-edit="module-2-copy">精选操盘案例，用结果证明方法与价值。</p><a href="#cases"><span>查看详情 →</span><span class="module-symbol">▣</span></a></article>
-        <article class="module-card"><span class="index">03</span><h3 data-edit="module-3-title">访谈</h3><p data-edit="module-3-copy">对话100位新商业领袖，记录他们的判断与选择。</p><a href="#interview"><span>查看详情 →</span><span class="module-symbol">●</span></a></article>
-        <article class="module-card"><span class="index">04</span><h3 data-edit="module-4-title">方法论</h3><p data-edit="module-4-copy">内容方法、商业方法与AI应用，持续进化的底层系统。</p><a href="#principles"><span>查看详情 →</span><span class="module-symbol">✦</span></a></article>
-        <article class="module-card"><span class="index">05</span><h3 data-edit="module-5-title">合作</h3><p data-edit="module-5-copy">长期陪跑、内容共创、项目PMO，寻找长期主义的合作伙伴。</p><a href="#cooperation"><span>查看详情 →</span><span class="module-symbol">●</span></a></article>
+        <article class="module-card"><span class="index">01</span><h3 data-edit="module-1-title">能力</h3><p data-edit="module-1-copy">四大能力模型，从内容到商业，全面驱动项目落地。</p><a href="#capabilities"><span>查看详情 →</span><span class="module-symbol">01</span></a></article>
+        <article class="module-card"><span class="index">02</span><h3 data-edit="module-2-title">案例</h3><p data-edit="module-2-copy">精选操盘案例，用结果证明方法与价值。</p><a href="#cases"><span>查看详情 →</span><span class="module-symbol">02</span></a></article>
+        <article class="module-card"><span class="index">03</span><h3 data-edit="module-3-title">经历</h3><p data-edit="module-3-copy">从大学创业、研发项目管理到商业IP合伙人，持续积累内容、商业与项目实战经验。</p><a href="#experience"><span>查看详情 →</span><span class="module-symbol">03</span></a></article>
+        <article class="module-card"><span class="index">04</span><h3 data-edit="module-4-title">理念</h3><p data-edit="module-4-copy">极致专注、价值驱动、内修自省与商业哲学，构成我长期做事的价值坐标。</p><a href="#principles"><span>查看详情 →</span><span class="module-symbol">04</span></a></article>
       </div>
     </div>
   </section>
@@ -312,7 +311,7 @@ copyButton?.addEventListener('click',async()=>{try{await navigator.clipboard.wri
 
 const editMode=new URLSearchParams(location.search).get('edit')==='1';
 const editable=[...document.querySelectorAll('[data-edit]')];
-const storageKey='top-profile-blue-editor-v1';
+const storageKey='top-profile-blue-editor-v2';
 const editorToggle=document.getElementById('editorToggle');
 const editorExport=document.getElementById('editorExport');
 const editorReset=document.getElementById('editorReset');
