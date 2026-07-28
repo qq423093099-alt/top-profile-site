@@ -44,8 +44,9 @@ button{font:inherit}
 .nav a{position:relative;color:#d7e1f3;font-size:14px;font-weight:650;padding:14px 0;transition:.25s}
 .nav a::after{content:"";position:absolute;left:0;right:100%;bottom:4px;height:2px;background:linear-gradient(90deg,var(--blue-2),var(--violet));transition:.25s}
 .nav a:hover,.nav a.active{color:#57aaff}.nav a:hover::after,.nav a.active::after{right:0}
-.header-cta{display:inline-flex;align-items:center;gap:12px;padding:14px 22px;border:1px solid rgba(105,166,255,.35);border-radius:999px;background:linear-gradient(135deg,#318cff,#0860ef);box-shadow:0 12px 38px rgba(22,107,255,.28);font-size:14px;font-weight:750}
-.header-cta span{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.2)}
+.header-cta{display:inline-flex;flex:0 0 auto;align-items:center;justify-content:center;gap:12px;min-width:126px;padding:14px 18px;border:1px solid rgba(105,166,255,.35);border-radius:999px;background:linear-gradient(135deg,#318cff,#0860ef);box-shadow:0 12px 38px rgba(22,107,255,.28);font-size:14px;font-weight:750;line-height:1;white-space:nowrap}
+.header-cta .cta-label{display:inline;width:auto;height:auto;border-radius:0;background:none;white-space:nowrap}
+.header-cta .cta-icon{display:grid;flex:0 0 22px;place-items:center;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.2)}
 .menu-toggle{display:none;width:44px;height:44px;border:1px solid var(--line);border-radius:12px;background:rgba(8,25,54,.9);color:#fff;font-size:20px}
 .hero{position:relative;min-height:960px;padding:126px 0 36px;overflow:hidden}
 .hero::before{content:"";position:absolute;width:880px;height:880px;border:1px solid rgba(76,137,255,.18);border-radius:50%;right:-170px;top:70px;box-shadow:inset 0 0 130px rgba(39,125,255,.05);pointer-events:none}
@@ -118,6 +119,7 @@ button{font:inherit}
 .case-card.new-money::after{content:"";position:absolute;right:-90px;top:-130px;width:360px;height:360px;border:1px solid rgba(117,148,255,.16);border-radius:50%;background:radial-gradient(circle,rgba(100,74,255,.2),transparent 70%);pointer-events:none}
 .case-card.new-money .case-main{position:relative;z-index:1;padding-top:42px;padding-bottom:46px}
 .case-card.new-money h3{max-width:900px;margin:26px 0 12px;font-size:clamp(26px,3vw,42px);line-height:1.2}
+.interview-line{display:block}
 .case-card.new-money .smart-title span{display:inline-block;margin-right:.16em}
 .case-card.new-money .case-copy{max-width:930px;color:#aabbd2;font-size:14px;line-height:1.95}
 .case-quote{max-width:880px!important;margin:30px 0 0!important;padding:5px 0 5px 22px;border-left:2px solid #5a83ff;color:#d9e5f8!important;font-size:19px!important;line-height:1.75!important}
@@ -164,6 +166,37 @@ footer{min-height:86px;display:flex;align-items:center;justify-content:space-bet
 @media(max-width:480px){
   .hero h1{font-size:50px}.hero h1 b{font-size:.7em}.hero-visual{min-height:0;border-radius:20px}.portrait-caption{padding:8px 10px}.portrait-caption strong{font-size:10px}.portrait-caption span{font-size:9px}.metrics{grid-template-columns:1fr}.metric::after{display:none!important}.metric{border-bottom:1px solid var(--line)}
 }
+@media print{
+  @page{size:A4;margin:0}
+  html,body{width:210mm;background:#020712!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{font-size:11px}
+  body::after{display:none}
+  .site-header{position:relative;height:20mm;background:#020b1c!important;backdrop-filter:none}
+  .header-inner{gap:12px}.site-header .shell{margin-inline:12mm}
+  .brand{font-size:17px}.brand strong{font-size:22px}
+  .nav,.header-cta,.menu-toggle,.editor-toolbar,.toast{display:none!important}
+  .shell{width:auto;margin-inline:12mm}
+  .hero{min-height:277mm;padding:8mm 0 9mm;break-after:page;overflow:hidden}
+  .hero::before{width:150mm;height:150mm;right:-35mm;top:15mm}
+  .hero-grid{grid-template-columns:1.04fr .96fr;min-height:92mm}
+  .hero-copy{padding:3mm 0 6mm;max-width:none}
+  .hero-kicker{margin-bottom:4mm;font-size:8px}
+  .hero h1{gap:12px;font-size:45px}.hero h1 b{font-size:.82em}
+  .hero-roles{margin-top:5mm;font-size:14px;line-height:1.5;word-spacing:3px}
+  .hero-rule{margin:5mm 0;width:18mm}.hero-tags{font-size:12px}.hero-desc{max-width:92mm;font-size:10px;line-height:1.7}
+  .hero-visual{aspect-ratio:900/520;border-radius:16px}.portrait-caption{right:5px;bottom:5px;padding:6px 8px}.portrait-caption strong{font-size:8px}.portrait-caption span{margin-top:3px;font-size:7px}
+  .metrics{grid-template-columns:repeat(4,1fr);margin-top:6mm}.metric{min-height:25mm;padding:4mm}.metric::after{display:block!important}.metric:last-child::after{display:none!important}.metric-icon{width:9mm;height:9mm}.metric strong{font-size:17px}.metric>div>span{font-size:8px}
+  .module-grid{grid-template-columns:repeat(4,1fr);gap:3mm;margin-top:4mm}.module-card{min-height:42mm;padding:4mm}.module-card h3{font-size:14px}.module-card p{min-height:0;font-size:8px;line-height:1.55}.module-link{font-size:8px}
+  .section{padding:14mm 0;break-before:page}
+  .section-head{gap:8mm;margin-bottom:8mm}.section-head h2{font-size:34px}.section-head>p{font-size:10px}
+  .capability-grid,.principles-grid,.cooperation-grid{grid-template-columns:repeat(2,1fr);gap:4mm}.capability-card,.principle-card,.cooperation-card{min-height:58mm;padding:6mm}.capability-card h3,.principle-card h3,.cooperation-card h3{font-size:22px}.capability-card p,.principle-card p,.cooperation-card p{font-size:10px;line-height:1.7}
+  .case-list{gap:4mm}.case-card{grid-template-columns:13mm 1fr;break-inside:avoid}.case-number{padding:5mm 3mm}.case-main{padding:5mm}.case-main h3,.case-card.new-money h3{margin:4mm 0 2mm;font-size:23px}.case-main p{font-size:9px;line-height:1.65}.case-results{margin-top:4mm}.case-results strong{font-size:18px}.case-results span{font-size:8px}
+  .timeline{max-width:none}.timeline-item{grid-template-columns:31mm 8mm 1fr;break-inside:avoid}.timeline-content{padding:0 0 7mm 6mm}.timeline-content h3{font-size:21px}.timeline-content h4{font-size:11px}.timeline-content p{font-size:9px;line-height:1.65}
+  #principles,#cooperation{min-height:297mm;display:flex;align-items:center}
+  .contact{min-height:274mm;break-before:page}.contact h2{font-size:48px}.contact-copy{font-size:12px}.contact-actions{margin-top:8mm}
+  footer{min-height:23mm;break-inside:avoid;padding:0 12mm;font-size:8px}
+  .reveal{opacity:1!important;transform:none!important}
+}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none}*{transition:none!important}}
 </style>
 </head>
@@ -177,7 +210,7 @@ footer{min-height:86px;display:flex;align-items:center;justify-content:space-bet
       <a href="#experience" data-edit="nav-experience">03 经历</a>
       <a href="#principles" data-edit="nav-principles">04 理念</a>
     </nav>
-    <a class="header-cta" href="#contact"><span data-edit="header-cta">联系合作</span><span>›</span></a>
+    <a class="header-cta" href="#contact"><span class="cta-label" data-edit="header-cta">深度链接</span><span class="cta-icon" aria-hidden="true">›</span></a>
     <button class="menu-toggle" type="button" aria-label="打开菜单">☰</button>
   </div>
 </header>
@@ -218,7 +251,7 @@ footer{min-height:86px;display:flex;align-items:center;justify-content:space-bet
       <div class="section-head reveal"><div><p class="section-kicker" data-edit="cap-kicker">01 / CAPABILITIES</p><h2 data-edit="cap-heading">懂创始人 × 内容 × 商业 × 运营</h2></div><p data-edit="cap-intro">这也是我与普通操盘手、COO或PMO最大的区别。</p></div>
       <div class="capability-grid">
         <article class="glass-card capability-card reveal"><span class="cap-no">01</span><h3 data-edit="cap-1-title">懂创始人</h3><p data-edit="cap-1-copy">做过老板和合伙人，理解创始人为什么会同时想做很多事，也知道什么时候应该追问、劝停和做减法。</p><ul><li data-edit="cap-1-li1">个人定位与表达提炼</li><li data-edit="cap-1-li2">注意力与项目优先级</li><li data-edit="cap-1-li3">合作边界与关键决策</li></ul></article>
-        <article class="glass-card capability-card reveal"><span class="cap-no">02</span><h3 data-edit="cap-2-title">懂内容</h3><p data-edit="cap-2-copy">能从一个人的经历里找到可传播的故事、观点和冲突，并把访谈、口播和长内容拆成多平台可用的内容。</p><ul><li data-edit="cap-2-li1">选题、脚本与访谈大纲</li><li data-edit="cap-2-li2">拍摄、后期与内容结构</li><li data-edit="cap-2-li3">账号定位与内容体系</li></ul></article>
+        <article class="glass-card capability-card reveal"><span class="cap-no">02</span><h3 data-edit="cap-2-title">懂内容</h3><p data-edit="cap-2-copy">能从一个人的经历里找到可传播的故事、观点和冲突，挖掘最具传播力的人物切面，转化为内容、认知影响力与长期曝光。</p><ul><li data-edit="cap-2-li1">人物叙事切面挖掘</li><li data-edit="cap-2-li2">账号定位与内容体系搭建</li><li data-edit="cap-2-li3">选题策划、拍摄、后期制作</li></ul></article>
         <article class="glass-card capability-card reveal"><span class="cap-no">03</span><h3 data-edit="cap-3-title">懂商业</h3><p data-edit="cap-3-copy">做过课程、咨询、代运营、IP孵化和人物访谈服务，清楚内容如何接到产品、私域、成交和交付。</p><ul><li data-edit="cap-3-li1">高客单产品设计</li><li data-edit="cap-3-li2">私域承接与销售路径</li><li data-edit="cap-3-li3">交付标准与版权边界</li></ul></article>
         <article class="glass-card capability-card reveal"><span class="cap-no">04</span><h3 data-edit="cap-4-title">懂项目管理</h3><p data-edit="cap-4-copy">受过新能源头部企业研发项目管理训练，也在创业团队里长期处理多人、多节点、多供应商与高频变化。</p><ul><li data-edit="cap-4-li1">目标拆解与节点推进</li><li data-edit="cap-4-li2">跨团队、供应商协同</li><li data-edit="cap-4-li3">风险预警与项目复盘</li></ul></article>
       </div>
@@ -227,7 +260,7 @@ footer{min-height:86px;display:flex;align-items:center;justify-content:space-bet
 
   <section class="section cases" id="cases">
     <div class="shell">
-      <div class="section-head reveal"><div><p class="section-kicker" data-edit="cases-kicker">02 / SELECTED WORK</p><h2 data-edit="cases-heading">结果比头衔更有说服力</h2></div><p data-edit="cases-intro">以下不是“参与过”，而是我真正承担过定位、内容、统筹、转化或交付的项目。</p></div>
+      <div class="section-head reveal"><div><p class="section-kicker" data-edit="cases-kicker">02 / SELECTED WORK</p><h2 data-edit="cases-heading">结果比头衔更有说服力</h2></div><p data-edit="cases-intro">以下不是“参与过”，而是我真正承担过定位、内容策划、统筹、转化或交付的项目。</p></div>
       <div class="case-list">
         <article class="case-card reveal"><div class="case-number">01</div><div class="case-main"><div class="case-meta"><span data-edit="case-1-type">IP孵化 · 知识付费</span><span data-edit="case-1-name">乐乐同学（深圳）文化传媒有限公司</span></div><h3 data-edit="case-1-title">三个月从0到1，跑通商业IP的流量、产品与变现闭环。</h3><p data-edit="case-1-copy">从0到1搭建公司产品体系、团队组织、私域、销售和项目交付，操盘公司账号定位、选题策划、脚本编写、IP出镜与运营策略。</p><div class="case-results"><div><strong data-edit="case-1-r1">200万+</strong><span>累计变现</span></div><div><strong data-edit="case-1-r2">近10万</strong><span>全网粉丝</span></div><div><strong data-edit="case-1-r3">7,000+</strong><span>私域进线</span></div><div><strong data-edit="case-1-r4">500万+</strong><span>单条最高播放</span></div></div></div></article>
         <article class="case-card reveal"><div class="case-number">02</div><div class="case-main"><div class="case-meta"><span data-edit="case-2-type">商业IP · 非标品</span><span data-edit="case-2-name">公子周的觉茶</span></div><h3 data-edit="case-2-title">从0起号，把香港人文内容接到茶品牌B端生意。</h3><p data-edit="case-2-copy">负责账号定位、选题策划、脚本编写、后期制作、产品策略与运营；3个月通过45条视频，打通“公转私—产品转化”的完整链路。</p><div class="case-results three"><div><strong data-edit="case-2-r1">3万</strong><span>全网粉丝</span></div><div><strong data-edit="case-2-r2">65万</strong><span>月均播放</span></div><div><strong data-edit="case-2-r3">100万+</strong><span>B端累计变现</span></div></div></div></article>
@@ -237,8 +270,8 @@ footer{min-height:86px;display:flex;align-items:center;justify-content:space-bet
           <div class="case-number">05</div>
           <div class="case-main">
             <div class="case-meta"><span data-edit="interview-label">2026 长期个人项目</span><span>New Money 人物访谈</span></div>
-            <h3 class="smart-title" data-edit="interview-title"><span>访谈100位</span><span>New Money，</span><span>记录年轻创业者的</span><span>财富跃迁。</span></h3>
-            <p class="case-copy" data-edit="interview-copy">由我发起并主导嘉宾筛选、前采、故事挖掘、访谈大纲、现场串联、后期结构和全网发布。聚焦年轻创业者、企业家、新贵与新兴产业，已覆盖上市企业家、CEO、AI创业者、投资人、金融、Web3与跨境出海从业者。</p>
+            <h3 class="smart-title" data-edit="interview-title"><span>访谈100位</span><span>New Money，</span><span class="interview-line"><span>记录年轻创业者的</span><span>财富跃迁。</span></span></h3>
+            <p class="case-copy" data-edit="interview-copy">由我发起并主导嘉宾筛选、前采、故事挖掘、访谈大纲、现场串联、后期结构和全网发布。聚焦年轻创业者、企业家、新贵与新兴产业，已覆盖百万粉丝博主、超级个体、AI创业者、投资人、金融、Web3与跨境出海从业者。</p>
             <p class="case-quote" data-edit="interview-quote">我不只记录结果，更关心一个人走到今天的关键选择、商业判断与时代机会。</p>
           </div>
         </article>
@@ -260,7 +293,7 @@ footer{min-height:86px;display:flex;align-items:center;justify-content:space-bet
 
   <section class="section principles" id="principles">
     <div class="shell">
-      <div class="section-head reveal"><div><p class="section-kicker">04 / PRINCIPLES</p><h2 data-edit="principles-heading">我的方法论与理念</h2></div><p data-edit="principles-intro">内容、商业与AI只是工具，长期判断来自稳定的价值坐标。</p></div>
+      <div class="section-head reveal"><div><p class="section-kicker">04 / PRINCIPLES</p><h2 data-edit="principles-heading">我的理念</h2></div><p data-edit="principles-intro">内容、商业与AI只是工具，长期判断来自稳定的价值坐标。</p></div>
       <div class="principles-grid">
         <article class="glass-card principle reveal"><span class="num">01</span><h3 data-edit="principle-1-title">极致专注</h3><p data-edit="principle-1-copy">长期聚焦真正擅长之事，把热爱沉淀成专业壁垒。</p></article>
         <article class="glass-card principle reveal"><span class="num">02</span><h3 data-edit="principle-2-title">价值驱动</h3><p data-edit="principle-2-copy">不被短期利益裹挟，只为真实价值与长期信任买单。</p></article>
@@ -272,7 +305,7 @@ footer{min-height:86px;display:flex;align-items:center;justify-content:space-bet
 
   <section class="section" id="cooperation">
     <div class="shell">
-      <div class="section-head reveal"><div><p class="section-kicker">WORK WITH ME</p><h2 data-edit="cooperation-heading">适合项目类型</h2></div><p data-edit="cooperation-intro">这些合作需要内容、商业和项目能力同时在线。</p></div>
+      <div class="section-head reveal"><div><p class="section-kicker">WORK WITH ME</p><h2 data-edit="cooperation-heading">适合项目类型</h2></div><p data-edit="cooperation-intro"><br></p></div>
       <div class="cooperation-grid">
         <article class="glass-card cooperation-card reveal"><span class="num">01</span><h3 data-edit="coop-1-title">商业IP战略与内容营销</h3><p data-edit="coop-1-copy">从定位、选题、表达、内容体系，到产品、私域和成交路径。</p></article>
         <article class="glass-card cooperation-card reveal"><span class="num">02</span><h3 data-edit="coop-2-title">企业家 / 创始人物访谈</h3><p data-edit="coop-2-copy">梳理人生故事、商业判断与个人标签，形成可持续传播的内容资产。</p></article>
@@ -316,7 +349,7 @@ copyButton?.addEventListener('click',async()=>{try{await navigator.clipboard.wri
 
 const editMode=new URLSearchParams(location.search).get('edit')==='1';
 const editable=[...document.querySelectorAll('[data-edit]')];
-const storageKey='top-profile-blue-editor-v5';
+const storageKey='top-profile-blue-editor-v6';
 const editorToggle=document.getElementById('editorToggle');
 const editorExport=document.getElementById('editorExport');
 const editorReset=document.getElementById('editorReset');
