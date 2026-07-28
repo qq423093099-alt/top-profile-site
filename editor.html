@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0a0a0d">
+<title>TOP｜梁俊铭 · 网站可视化编辑器</title>
+<style>
+:root{--bg:#09090b;--panel:#141419;--line:rgba(255,255,255,.12);--text:#f4f1ea;--muted:#a7a5ad;--accent:#9c7cff;--green:#9ce9c5}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:Inter,"PingFang SC","Microsoft YaHei",system-ui,sans-serif}
+.app{height:100%;display:grid;grid-template-rows:auto 1fr}
+.toolbar{position:relative;z-index:20;display:flex;align-items:center;gap:10px;min-height:72px;padding:12px 18px;border-bottom:1px solid var(--line);background:rgba(10,10,13,.96);backdrop-filter:blur(20px)}
+.brand{display:flex;align-items:center;gap:11px;margin-right:auto;min-width:0}
+.brand-mark{width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(135deg,#9c7cff,#72a7ff,#ff9d6c);color:#09090b;font-weight:900}
+.brand-copy{min-width:0}.brand-copy strong{display:block;font-size:14px}.brand-copy span{display:block;margin-top:3px;color:var(--muted);font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.status{display:flex;align-items:center;gap:7px;padding:8px 11px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:11px;white-space:nowrap}.status i{width:7px;height:7px;border-radius:50%;background:#777}.status.ready i{background:var(--green);box-shadow:0 0 14px var(--green)}.status.editing i{background:var(--accent);box-shadow:0 0 14px var(--accent)}
+button{height:42px;padding:0 15px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.045);color:var(--text);font:inherit;font-size:12px;cursor:pointer;transition:.2s}button:hover{background:rgba(255,255,255,.09);transform:translateY(-1px)}button:disabled{opacity:.35;cursor:not-allowed;transform:none}.primary{border-color:transparent;background:#f3f0e8;color:#09090b;font-weight:750}.primary:hover{background:#fff}.accent{border-color:rgba(156,124,255,.5);background:rgba(156,124,255,.16)}
+.canvas{position:relative;min-height:0;background:#050506}.canvas iframe{display:block;width:100%;height:100%;border:0;background:#09090b}.loading,.error{position:absolute;inset:0;display:grid;place-items:center;text-align:center;background:#09090b;color:var(--muted);z-index:10}.loading span{display:inline-flex;align-items:center;gap:10px}.loading i{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 20px var(--accent);animation:pulse 1s ease-in-out infinite}.error{display:none;padding:30px;line-height:1.8}.error strong{display:block;color:var(--text);font-size:20px;margin-bottom:8px}
+.help{position:absolute;left:18px;bottom:18px;z-index:15;max-width:420px;padding:13px 15px;border:1px solid var(--line);border-radius:14px;background:rgba(9,9,12,.88);backdrop-filter:blur(16px);color:var(--muted);font-size:11px;line-height:1.7;pointer-events:none;transition:.25s}.help b{color:var(--text)}.help.hidden{opacity:0;transform:translateY(8px)}
+.toast{position:fixed;right:20px;bottom:20px;z-index:50;padding:12px 16px;border-radius:12px;background:#f3f0e8;color:#09090b;font-size:12px;font-weight:700;opacity:0;transform:translateY(10px);transition:.25s;pointer-events:none}.toast.show{opacity:1;transform:none}
+@media(max-width:900px){.toolbar{gap:7px;padding:10px}.brand-copy span,.status{display:none}button{height:40px;padding:0 11px;font-size:11px}.help{left:10px;right:10px;bottom:10px;max-width:none}.brand-mark{width:36px;height:36px}.brand-copy strong{max-width:110px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+@keyframes pulse{50%{opacity:.35;transform:scale(.75)}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="toolbar">
+    <div class="brand">
+      <div class="brand-mark">T</div>
+      <div class="brand-copy"><strong>网站可视化编辑器</strong><span>TOP｜梁俊铭 · 当前正式首页副本</span></div>
+    </div>
+    <div class="status" id="status"><i></i><span>正在载入</span></div>
+    <button id="editBtn" class="accent" disabled>开始编辑</button>
+    <button id="undoBtn" disabled>撤销</button>
+    <button id="redoBtn" disabled>重做</button>
+    <button id="resetBtn" disabled>恢复原版</button>
+    <button id="exportBtn" class="primary" disabled>导出修改版</button>
+  </header>
+  <main class="canvas">
+    <div class="loading" id="loading"><span><i></i>正在载入当前网站…</span></div>
+    <div class="error" id="error"><div><strong>网站载入失败</strong><span>请刷新页面后重新尝试。</span></div></div>
+    <iframe id="preview" title="网站编辑预览"></iframe>
+    <div class="help" id="help"><b>操作：</b>点击“开始编辑”，再直接点击网页中的文字修改。改完点击“完成编辑”，最后点击“导出修改版”。图片和整体排版暂时不要拖动。</div>
+  </main>
+</div>
+<div class="toast" id="toast">修改版已导出</div>
+<script>
+const frame=document.getElementById('preview');
+const loading=document.getElementById('loading');
+const errorBox=document.getElementById('error');
+const statusBox=document.getElementById('status');
+const editBtn=document.getElementById('editBtn');
+const undoBtn=document.getElementById('undoBtn');
+const redoBtn=document.getElementById('redoBtn');
+const resetBtn=document.getElementById('resetBtn');
+const exportBtn=document.getElementById('exportBtn');
+const help=document.getElementById('help');
+const toast=document.getElementById('toast');
+let originalHtml='';
+let editing=false;
+
+function setStatus(type,text){statusBox.className='status '+type;statusBox.querySelector('span').textContent=text}
+function showToast(text){toast.textContent=text;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1800)}
+function editorStyle(doc){
+  let style=doc.getElementById('__visual_editor_style__');
+  if(!style){style=doc.createElement('style');style.id='__visual_editor_style__';doc.head.appendChild(style)}
+  style.textContent=editing?`[contenteditable="true"]{outline:1px dashed rgba(156,124,255,.45)!important;outline-offset:5px;cursor:text!important}[contenteditable="true"]:hover{outline-color:#9c7cff!important;background:rgba(156,124,255,.055)!important}a,button{pointer-events:none!important}`:'';
+}
+function editableTargets(doc,on){
+  const selectors=['.brand span:last-child','.hero-copy','.hero-card-copy','.metrics','.capabilities-section','.cases-section','.experience-section','.direction-section','.principles-section','.contact-inner','footer'];
+  doc.querySelectorAll(selectors.join(',')).forEach(el=>on?el.setAttribute('contenteditable','true'):el.removeAttribute('contenteditable'));
+  doc.designMode='off';
+  editorStyle(doc);
+}
+function toggleEdit(force){
+  if(!frame.contentDocument)return;
+  editing=typeof force==='boolean'?force:!editing;
+  editableTargets(frame.contentDocument,editing);
+  editBtn.textContent=editing?'完成编辑':'开始编辑';
+  editBtn.classList.toggle('accent',!editing);
+  setStatus(editing?'editing':'ready',editing?'编辑中':'已载入');
+  undoBtn.disabled=!editing;redoBtn.disabled=!editing;
+  help.classList.toggle('hidden',!editing);
+  if(editing)showToast('现在可以直接点击文字修改');
+}
+function cleanExportHtml(){
+  const doc=frame.contentDocument;
+  const clone=doc.documentElement.cloneNode(true);
+  clone.querySelectorAll('[contenteditable]').forEach(el=>el.removeAttribute('contenteditable'));
+  clone.querySelector('#__visual_editor_style__')?.remove();
+  return '<!DOCTYPE html>\n'+clone.outerHTML;
+}
+async function loadSite(){
+  try{
+    const response=await fetch('./index.html?editor='+Date.now(),{cache:'no-store'});
+    if(!response.ok)throw new Error('HTTP '+response.status);
+    originalHtml=await response.text();
+    frame.srcdoc=originalHtml;
+    frame.addEventListener('load',()=>{
+      loading.style.display='none';
+      setStatus('ready','已载入');
+      [editBtn,resetBtn,exportBtn].forEach(b=>b.disabled=false);
+      try{frame.contentWindow.scrollTo(0,0)}catch(e){}
+    },{once:true});
+  }catch(e){loading.style.display='none';errorBox.style.display='grid';setStatus('','载入失败');console.error(e)}
+}
+editBtn.addEventListener('click',()=>toggleEdit());
+undoBtn.addEventListener('click',()=>{frame.contentDocument.execCommand('undo');showToast('已撤销')});
+redoBtn.addEventListener('click',()=>{frame.contentDocument.execCommand('redo');showToast('已重做')});
+resetBtn.addEventListener('click',()=>{
+  if(!confirm('确定恢复到打开编辑器时的原版吗？当前修改会丢失。'))return;
+  editing=false;frame.srcdoc=originalHtml;editBtn.textContent='开始编辑';undoBtn.disabled=true;redoBtn.disabled=true;setStatus('ready','已恢复');showToast('已恢复原版');
+});
+exportBtn.addEventListener('click',()=>{
+  if(editing)toggleEdit(false);
+  const html=cleanExportHtml();
+  const blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download='TOP_梁俊铭_网站修改版.html';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);showToast('修改版已导出，请发给我保存');
+});
+window.addEventListener('beforeunload',e=>{if(editing){e.preventDefault();e.returnValue=''}});
+loadSite();
+</script>
+</body>
+</html>
